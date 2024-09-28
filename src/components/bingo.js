@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
-import './bingo.css';
 
 // Function to generate the bingo card
 const generateBingoCard = () => {
   const numbers = Array.from({ length: 25 }, (_, i) => i + 1);
   const shuffledNumbers = numbers.sort(() => Math.random() - 0.5);
 
-  const card = Array.from({length: 5}, (_,rowIndex)=> (
+  const card = Array.from({ length: 5}, (_, rowIndex) =>
     shuffledNumbers.slice(rowIndex * 5, rowIndex * 5 + 5)
-  ));
+  );
 
-  const winningNumber = Math.floor(Math.random() * 25) +1;
-  const winningRow = Math.floor(Math.random() *5);
+  const winningNumber = Math.floor(Math.random() * 25) + 1;
+  const winningRow = Math.floor(Math.random() * 5);
   card[winningRow] = Array(5).fill(winningNumber);
 
+  // Set middle tile as Free space
+  card[2][2] = "Free"; // Middle tile is at position (2, 2)
+
   return card;
-  
- 
 };
 
 const generateWinningNumbers = (bingoCard) => {
   const flatCard = bingoCard.flat();
   const shuffledWinningNumbers = flatCard.sort(() => Math.random() - 0.5);
-  return shuffledWinningNumbers.slice(0, 5);//Get random winning numbers. 
-}
+  return shuffledWinningNumbers.slice(0, 5); // Get random winning numbers
+};
 
 const Bingo = () => {
   const [bingoCard, setBingoCard] = useState(generateBingoCard());
-
-  const [clickedTiles, setClickedTiles] = useState(Array(5).fill(null).map(() => Array(5).fill(false)));
-
-  const [winningNumbers, setWinningNumbers] = useState(generateWinningNumbers(bingoCard))
+  const [clickedTiles, setClickedTiles] = useState(
+    Array(5).fill(null).map(() => Array(5).fill(false))
+  );
+  const [winningNumbers, setWinningNumbers] = useState(generateWinningNumbers(bingoCard));
 
   const handleTileClick = (rowIndex, colIndex) => {
     const newClickedTiles = clickedTiles.map((row, rldx) =>
@@ -40,50 +40,51 @@ const Bingo = () => {
   };
 
   const isBingo = () => {
-   const checkBingo = (tiles) => {
+    const checkBingo= (numbers, clicked) => {
+      return numbers.every((num, index) => num === "Free" || clicked[index]);
+    };
 
-    const firstNumber = tiles[0];
-    return tiles.every((num) => num === firstNumber && num !== undefined);
-   };
+    //Check for Row bingo
+    const rowBingo = bingoCard.some((_, rowIndex) => {
+      return checkBingo(bingoCard[rowIndex], clickedTiles[rowIndex]);
+    });
 
-   const rowBingo = clickedTiles.some((_, rowIndex) => {
-    const numbersInRow = bingoCard[rowIndex].filter((_,colIndex) => clickedTiles[rowIndex][colIndex]);
-    
-    return numbersInRow.length === 5 && checkBingo(numbersInRow);
+    // Check for column bingo
+    const columnBingo = Array.from({ length: 5 }).some((_, colIndex) => {
+      const column = bingoCard.map((row) => row[colIndex]);
+      const clickedColumn = clickedTiles.map((row) => row[colIndex]);
+      return checkBingo(column, clickedColumn);
+    });
 
-   });
-
-   const columnBingo = Array.from({ length: 5}).some((_,colIndex) => {
-    const numbersInColumn = clickedTiles.map((row, rowIndex) => 
-      clickedTiles[rowIndex][colIndex] ? bingoCard[rowIndex][colIndex] : undefined
+    //check for main diagonal bingo
+    const mainDiagonalBingo = checkBingo(
+      bingoCard.map((_, index) => bingoCard[index][index]),
+      clickedTiles.map((_, index) => clickedTiles[index][index])
     );
-    return numbersInColumn.length === 5 && checkBingo(numbersInColumn);
-   });
 
-   const mainDiagonalBingo = clickedTiles.every((_, index) => {
-    return clickedTiles[index][index] && bingoCard[index][index];
-   }) && checkBingo(clickedTiles.map((_, index) => bingoCard[index][index]));
 
-   const antiDiagonalBingo = clickedTiles.every((_,index) => {
-    return clickedTiles[index][4 - index] && bingoCard[index][4 - index];
-   }) && checkBingo(clickedTiles.map((_, index) => bingoCard[index][4 - index]));
+    //Check for anti-diagonal bingo
+    const antiDiagonalBingo = checkBingo(
+      bingoCard.map((_, index) => bingoCard[index][4 - index]), clickedTiles.map((_, index) => clickedTiles[index][4 - index])
+    );
 
-   return rowBingo || columnBingo || mainDiagonalBingo || antiDiagonalBingo;
+    return rowBingo || columnBingo || mainDiagonalBingo || antiDiagonalBingo;
   };
-  
 
+  // Make sure resetGame is inside the Bingo component
   const resetGame = () => {
-    const newBingoCard = generateBingoCard ();
+    const newBingoCard = generateBingoCard();
     setBingoCard(newBingoCard);
     setWinningNumbers(generateWinningNumbers(newBingoCard));
     setClickedTiles(Array(5).fill(null).map(() => Array(5).fill(false)));
   };
 
+  // The return should be at the end of the component, after the functions
   return (
     <div>
       <h1>Bingo Game</h1>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 100px)', gap: '10px' }}>
-        {bingoCard.map((row, rowIndex) => 
+        {bingoCard.map((row, rowIndex) =>
           row.map((number, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
@@ -100,7 +101,7 @@ const Bingo = () => {
                 fontSize: '24px'
               }}
             >
-              {clickedTiles[rowIndex][colIndex] ? number : ''}
+              {clickedTiles[rowIndex][colIndex] ? (number === "Free" ? "Free" : number) : ''}
             </div>
           ))
         )}
@@ -114,4 +115,4 @@ const Bingo = () => {
   );
 };
 
-export default Bingo ;
+export default Bingo;
