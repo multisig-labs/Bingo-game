@@ -4,25 +4,23 @@ import React, { useState } from 'react';
 const generateBingoCard = () => {
   const numbers = Array.from({ length: 25 }, (_, i) => i + 1);
   const shuffledNumbers = numbers.sort(() => Math.random() - 0.5);
-
-  const card = Array.from({ length: 5}, (_, rowIndex) =>
+  
+  // Create a card with unique numbers first
+  const card = Array.from({ length: 5 }, (_, rowIndex) =>
     shuffledNumbers.slice(rowIndex * 5, rowIndex * 5 + 5)
   );
-
-  const winningNumber = Math.floor(Math.random() * 25) + 1;
-  const winningRow = Math.floor(Math.random() * 5);
-  card[winningRow] = Array(5).fill(winningNumber);
 
   // Set middle tile as Free space
   card[2][2] = "Free"; // Middle tile is at position (2, 2)
 
-  return card;
-};
+  // Introduce a winning number
+  const winningNumber = Math.floor(Math.random() * 25) + 1;
 
-const generateWinningNumbers = (bingoCard) => {
-  const flatCard = bingoCard.flat();
-  const shuffledWinningNumbers = flatCard.sort(() => Math.random() - 0.5);
-  return shuffledWinningNumbers.slice(0, 5); // Get random winning numbers
+  // Randomly choose a row to fill with the winning number
+  const winningRow = Math.floor(Math.random() * 5);
+  card[winningRow] = Array(5).fill(winningNumber); // Fill entire row with the winning number
+
+  return card;
 };
 
 const Bingo = () => {
@@ -30,7 +28,6 @@ const Bingo = () => {
   const [clickedTiles, setClickedTiles] = useState(
     Array(5).fill(null).map(() => Array(5).fill(false))
   );
-  const [winningNumbers, setWinningNumbers] = useState(generateWinningNumbers(bingoCard));
 
   const handleTileClick = (rowIndex, colIndex) => {
     const newClickedTiles = clickedTiles.map((row, rldx) =>
@@ -39,50 +36,51 @@ const Bingo = () => {
     setClickedTiles(newClickedTiles);
   };
 
+  // Updated isBingo function
   const isBingo = () => {
-    const checkBingo= (numbers, clicked) => {
-      return numbers.every((num, index) => num === "Free" || clicked[index]);
+    const checkBingo = (numbers, clicked) => {
+      const clickedNumbers = numbers.map((num, index) => (clicked[index] ? num : null)).filter(num => num !== null);
+      const uniqueClickedNumbers = [...new Set(clickedNumbers)];
+      return uniqueClickedNumbers.length === 1 && clickedNumbers.length === 5; // Check if there are 5 clicked tiles of the same number
     };
 
-    //Check for Row bingo
-    const rowBingo = bingoCard.some((_, rowIndex) => {
-      return checkBingo(bingoCard[rowIndex], clickedTiles[rowIndex]);
+    // Check rows
+    const rowBingo = clickedTiles.some((row, rowIndex) => {
+      return checkBingo(bingoCard[rowIndex], row);
     });
 
-    // Check for column bingo
+    // Check columns
     const columnBingo = Array.from({ length: 5 }).some((_, colIndex) => {
       const column = bingoCard.map((row) => row[colIndex]);
       const clickedColumn = clickedTiles.map((row) => row[colIndex]);
       return checkBingo(column, clickedColumn);
     });
 
-    //check for main diagonal bingo
+    // Check main diagonal
     const mainDiagonalBingo = checkBingo(
       bingoCard.map((_, index) => bingoCard[index][index]),
       clickedTiles.map((_, index) => clickedTiles[index][index])
     );
 
-
-    //Check for anti-diagonal bingo
+    // Check anti-diagonal
     const antiDiagonalBingo = checkBingo(
-      bingoCard.map((_, index) => bingoCard[index][4 - index]), clickedTiles.map((_, index) => clickedTiles[index][4 - index])
+      bingoCard.map((_, index) => bingoCard[index][4 - index]),
+      clickedTiles.map((_, index) => clickedTiles[index][4 - index])
     );
 
     return rowBingo || columnBingo || mainDiagonalBingo || antiDiagonalBingo;
   };
 
-  // Make sure resetGame is inside the Bingo component
+  // Reset game
   const resetGame = () => {
     const newBingoCard = generateBingoCard();
     setBingoCard(newBingoCard);
-    setWinningNumbers(generateWinningNumbers(newBingoCard));
     setClickedTiles(Array(5).fill(null).map(() => Array(5).fill(false)));
   };
 
-  // The return should be at the end of the component, after the functions
   return (
     <div>
-      <h1>Bingo Game</h1>
+      <h1>Bingo</h1>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 100px)', gap: '10px' }}>
         {bingoCard.map((row, rowIndex) =>
           row.map((number, colIndex) => (
@@ -116,3 +114,4 @@ const Bingo = () => {
 };
 
 export default Bingo;
+
