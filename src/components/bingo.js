@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './bingo.css';
 
 // Function to generate the bingo card
 const generateBingoCard = () => {
@@ -11,7 +12,7 @@ const generateBingoCard = () => {
   );
 
   // Set middle tile as Free space
-  card[2][2] = "Free"; // Middle tile is at position (2, 2)
+  card[2][2] = "Free"; 
 
   // Introduce a winning number
   const winningNumber = Math.floor(Math.random() * 25) + 1;
@@ -36,7 +37,7 @@ const Bingo = () => {
     setClickedTiles(newClickedTiles);
   };
 
-  // Updated isBingo function
+  // Updated is Bingo function
   const isBingo = () => {
     const checkBingo = (numbers, clicked) => {
       const clickedNumbers = numbers.map((num, index) => (clicked[index] ? num : null)).filter(num => num !== null);
@@ -79,25 +80,16 @@ const Bingo = () => {
   };
 
   return (
-    <div>
-      <h1>Bingo</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 100px)', gap: '10px' }}>
+    <div className="bingo-container">
+      <h1 className="bingo-title">Bingo</h1>
+      <div className="bingo-grid">
         {bingoCard.map((row, rowIndex) =>
           row.map((number, colIndex) => (
             <div
-              key={`${rowIndex}-${colIndex}`}
-              onClick={() => handleTileClick(rowIndex, colIndex)}
-              style={{
-                width: '100px',
-                height: '100px',
-                backgroundColor: clickedTiles[rowIndex][colIndex] ? 'blue' : 'lightgray',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                cursor: 'pointer',
-                border: '1px solid #000',
-                fontSize: '24px'
-              }}
+            key={`${rowIndex}-${colIndex}`}
+            className={`bingo-tile ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''}`}
+            onClick={() => handleTileClick(rowIndex, colIndex)}
+              
             >
               {clickedTiles[rowIndex][colIndex] ? (number === "Free" ? "Free" : number) : ''}
             </div>
@@ -105,10 +97,10 @@ const Bingo = () => {
         )}
       </div>
 
-      <button onClick={resetGame} style={{ marginTop: '20px' }}>
+      <button className="reset-button" onClick={resetGame}>
         Start New Game
       </button>
-      {isBingo() && <h2 style={{ color: 'green' }}>Bingo!</h2>}
+      {isBingo() && <h2 className="bingo-alert">Bingo!</h2>}
     </div>
   );
 };

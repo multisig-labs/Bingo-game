@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
+
+html, body {
+  height: 100%;
+  margin:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bingo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 450px;
+  padding: 20px;
+  background-color: #EC6D6D ;
+  border-radius: 8px;
+ 
+ 
+}
+.bingo-title{
+  font-size: 110px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Signika', 'sans-serif';
+  margin: 0;
+}
+
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 80px);
+  grid-template-rows: repeat(5, 80px);
+  gap: 1px;
+  padding: 20px;
+  max-width:400px;
+  color: white;
+
+}
+
+
+.bingo-tile {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  background-color:#EACCE4;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  justify-content: center;
+  align-items:center;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+}
+
+
+.bingo-tile.clicked{
+  background-color: #5B084A;
+}
+
+.reset-button{
+  margin: 20px;
+}
+
+.bingo-alert{
+  color: #5B084A;
+  font-size: 24px;
+}
