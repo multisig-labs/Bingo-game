@@ -33,9 +33,9 @@ html, body {
 
 .bingo-grid {
   display: grid;
-  grid-template-columns: repeat(5, 80px);
-  grid-template-rows: repeat(5, 80px);
-  gap: 1px;
+  grid-template-columns: repeat(3, 120px);
+  grid-template-rows: repeat(3, 120px);
+  gap: 12px;
   padding: 20px;
   max-width:400px;
   color: white;
@@ -44,8 +44,6 @@ html, body {
 
 
 .bingo-tile {
-  width: 70px;
-  height: 70px;
   display: flex;
   background-color:#EACCE4;
   border: 1px solid transparent;

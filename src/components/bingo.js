@@ -3,23 +3,38 @@ import './bingo.css';
 
 // Function to generate the bingo card
 const generateBingoCard = () => {
-  const numbers = Array.from({ length: 25 }, (_, i) => i + 1);
+  const numbers = Array.from({ length: 9 }, (_, i) => i + 1);
   const shuffledNumbers = numbers.sort(() => Math.random() - 0.5);
-  
+
   // Create a card with unique numbers first
-  const card = Array.from({ length: 5 }, (_, rowIndex) =>
-    shuffledNumbers.slice(rowIndex * 5, rowIndex * 5 + 5)
+  const card = Array.from({ length: 3 }, (_, rowIndex) =>
+    shuffledNumbers.slice(rowIndex * 3, rowIndex * 3 + 3)
   );
 
-  // Set middle tile as Free space
-  card[2][2] = "Free"; 
+  // Set the middle tile as "Free"
+  card[1][1] = "Free";
 
-  // Introduce a winning number
-  const winningNumber = Math.floor(Math.random() * 25) + 1;
+  // Randomly choose a winning combination (row, column, or diagonal)
+  const winningCombinationType = Math.floor(Math.random() * 3); // 0 for row, 1 for column, 2 for diagonal
 
-  // Randomly choose a row to fill with the winning number
-  const winningRow = Math.floor(Math.random() * 5);
-  card[winningRow] = Array(5).fill(winningNumber); // Fill entire row with the winning number
+  if (winningCombinationType === 0) {
+    // Winning row
+    const winningRowIndex = Math.floor(Math.random() * 3);
+    card[winningRowIndex] = Array(3).fill(card[winningRowIndex][0]); // Fill row with the same number
+  } else if (winningCombinationType === 1) {
+    // Winning column
+    const winningColIndex = Math.floor(Math.random() * 3);
+    const winningNumber = card[0][winningColIndex]; // Use the number from the first row
+    card[0][winningColIndex] = winningNumber;
+    card[1][winningColIndex] = winningNumber;
+    card[2][winningColIndex] = winningNumber; // Fill column with the same number
+  } else {
+    // Winning diagonal
+    const winningNumber = card[0][0]; // Use the number from the top-left corner
+    card[0][0] = winningNumber;
+    card[1][1] = winningNumber; // The Free space already counts as wildcard
+    card[2][2] = winningNumber; // Fill main diagonal
+  }
 
   return card;
 };
@@ -27,7 +42,7 @@ const generateBingoCard = () => {
 const Bingo = () => {
   const [bingoCard, setBingoCard] = useState(generateBingoCard());
   const [clickedTiles, setClickedTiles] = useState(
-    Array(5).fill(null).map(() => Array(5).fill(false))
+    Array(3).fill(null).map(() => Array(3).fill(false))
   );
 
   const handleTileClick = (rowIndex, colIndex) => {
@@ -37,46 +52,44 @@ const Bingo = () => {
     setClickedTiles(newClickedTiles);
   };
 
-  // Updated is Bingo function
   const isBingo = () => {
     const checkBingo = (numbers, clicked) => {
-      const clickedNumbers = numbers.map((num, index) => (clicked[index] ? num : null)).filter(num => num !== null);
-      const uniqueClickedNumbers = [...new Set(clickedNumbers)];
-      return uniqueClickedNumbers.length === 1 && clickedNumbers.length === 5; // Check if there are 5 clicked tiles of the same number
+      const clickedNumbers = numbers.map((num, index) => {
+        return clicked[index] || num === "Free" ? num : null;
+      }).filter(num => num !== null);
+
+      // Check if there are exactly 3 clicked tiles
+      return clickedNumbers.length === 3 && new Set(clickedNumbers).size === 1;
     };
 
-    // Check rows
-    const rowBingo = clickedTiles.some((row, rowIndex) => {
-      return checkBingo(bingoCard[rowIndex], row);
-    });
+    // Check rows for Bingo
+    const rowBingo = clickedTiles.some((row, rowIndex) => checkBingo(bingoCard[rowIndex], row));
 
-    // Check columns
-    const columnBingo = Array.from({ length: 5 }).some((_, colIndex) => {
-      const column = bingoCard.map((row) => row[colIndex]);
-      const clickedColumn = clickedTiles.map((row) => row[colIndex]);
+    // Check columns for Bingo
+    const columnBingo = Array.from({ length: 3 }).some((_, colIndex) => {
+      const column = bingoCard.map(row => row[colIndex]);
+      const clickedColumn = clickedTiles.map(row => row[colIndex]);
       return checkBingo(column, clickedColumn);
     });
 
-    // Check main diagonal
+    // Check diagonals for Bingo
     const mainDiagonalBingo = checkBingo(
       bingoCard.map((_, index) => bingoCard[index][index]),
       clickedTiles.map((_, index) => clickedTiles[index][index])
     );
 
-    // Check anti-diagonal
     const antiDiagonalBingo = checkBingo(
-      bingoCard.map((_, index) => bingoCard[index][4 - index]),
-      clickedTiles.map((_, index) => clickedTiles[index][4 - index])
+      bingoCard.map((_, index) => bingoCard[index][2 - index]),
+      clickedTiles.map((_, index) => clickedTiles[index][2 - index])
     );
 
     return rowBingo || columnBingo || mainDiagonalBingo || antiDiagonalBingo;
   };
 
-  // Reset game
   const resetGame = () => {
     const newBingoCard = generateBingoCard();
     setBingoCard(newBingoCard);
-    setClickedTiles(Array(5).fill(null).map(() => Array(5).fill(false)));
+    setClickedTiles(Array(3).fill(null).map(() => Array(3).fill(false)));
   };
 
   return (
@@ -86,12 +99,11 @@ const Bingo = () => {
         {bingoCard.map((row, rowIndex) =>
           row.map((number, colIndex) => (
             <div
-            key={`${rowIndex}-${colIndex}`}
-            className={`bingo-tile ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''}`}
-            onClick={() => handleTileClick(rowIndex, colIndex)}
-              
+              key={`${rowIndex}-${colIndex}`}
+              className={`bingo-tile ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''} ${number === "Free" ? 'free-tile' : ''}`}
+              onClick={() => handleTileClick(rowIndex, colIndex)}
             >
-              {clickedTiles[rowIndex][colIndex] ? (number === "Free" ? "Free" : number) : ''}
+              {number === "Free" ? 'Free' : (clickedTiles[rowIndex][colIndex] ? number : '')}
             </div>
           ))
         )}
@@ -100,10 +112,9 @@ const Bingo = () => {
       <button className="reset-button" onClick={resetGame}>
         Start New Game
       </button>
-      {isBingo() && <h2 className="bingo-alert">Bingo!</h2>}
+      {isBingo() && <h2 className="bingo-alert">Bingo! Go Find Breevee!</h2>}
     </div>
   );
 };
 
 export default Bingo;
-
