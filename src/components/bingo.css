@@ -54,12 +54,15 @@ html, body {
   font-size: 24px;
   transition: background-color 0.3s;
   margin-bottom: 10px;
+  font-size: 16px;
+  
 }
 
 
 .bingo-tile.clicked{
   background-color: #5B084A;
 }
+
 
 .reset-button{
   margin: 20px;
