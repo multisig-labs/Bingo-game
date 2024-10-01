@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import '../index.css';
 import Modal from './bingo-alert';
 
-
-// Function to generate the bingo card
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
   card[1][1] = "Free"; 
   return card;
 };
 
-// Data to display on front of cards
 const names = [
   { firstName: "Alice", lastName: "Smith", company: "Company A", position: "Manager" },
   { firstName: "Becky", lastName: "", company: "Company B", position: "Developer" },
@@ -27,7 +24,6 @@ const Bingo = () => {
   const [bingoCard, setBingoCard] = useState(generateBingoCard());
   const [clickedTiles, setClickedTiles] = useState(Array(3).fill(null).map(() => Array(3).fill(false)));
   const [isModalOpen, setIsModalOpen] = useState(false);
- 
 
   const handleTileClick = (rowIndex, colIndex) => {
     const newClickedTiles = clickedTiles.map((row, rldx) =>
@@ -40,7 +36,7 @@ const Bingo = () => {
   const checkBingo = (tiles) => {
     const clickedCount = tiles.flat().filter(Boolean).length; 
     if (clickedCount >= 3) {
-      setIsModalOpen(true); // Open the modal
+      setIsModalOpen(true);
     }
   };
 
@@ -49,7 +45,6 @@ const Bingo = () => {
     setBingoCard(newBingoCard);
     setClickedTiles(Array(3).fill(null).map(() => Array(3).fill(false)));
     setIsModalOpen(false);
-    
   };
 
   return (
@@ -66,10 +61,16 @@ const Bingo = () => {
                 onClick={() => handleTileClick(rowIndex, colIndex)}
               >
                 <div>
-                  <div>{firstName}</div>
-                  {lastName && <div>{lastName}</div>}
-                  <div>{company}</div>
-                  {position && <div>{position}</div>}
+                  {clickedTiles[rowIndex][colIndex] ? (
+                    '' // Render nothing if clicked
+                  ) : (
+                    <>
+                      <div>{firstName}</div>
+                      {lastName && <div>{lastName}</div>}
+                      <div>{company}</div>
+                      {position && <div>{position}</div>}
+                    </>
+                  )}
                 </div>
               </div>
             );
@@ -81,7 +82,7 @@ const Bingo = () => {
         Start New Game
       </button>
       
-      <Modal isOpen={isModalOpen} onClose={resetGame} />
+      <Modal isOpen={isModalOpen} onClose={resetGame}/>
     </div>
   );
 };
