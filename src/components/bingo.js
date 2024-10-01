@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import './bingo.css';
+import '../index.css';
+import Modal from './bingo-alert';
+
 
 // Function to generate the bingo card
 const generateBingoCard = () => {
@@ -23,26 +25,31 @@ const names = [
 
 const Bingo = () => {
   const [bingoCard, setBingoCard] = useState(generateBingoCard());
-  const [clickedTiles, setClickedTiles] = useState(
-    Array(3).fill(null).map(() => Array(3).fill(false))
-  );
+  const [clickedTiles, setClickedTiles] = useState(Array(3).fill(null).map(() => Array(3).fill(false)));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
   const handleTileClick = (rowIndex, colIndex) => {
     const newClickedTiles = clickedTiles.map((row, rldx) =>
       row.map((clicked, cldx) => (rldx === rowIndex && cldx === colIndex ? !clicked : clicked))
     );
     setClickedTiles(newClickedTiles);
+    checkBingo(newClickedTiles);
   };
 
-  const isBingo = () => {
-    const clickedCount = clickedTiles.flat().filter(Boolean).length; 
-    return clickedCount >= 3; 
+  const checkBingo = (tiles) => {
+    const clickedCount = tiles.flat().filter(Boolean).length; 
+    if (clickedCount >= 3) {
+      setIsModalOpen(true); // Open the modal
+    }
   };
 
   const resetGame = () => {
     const newBingoCard = generateBingoCard();
     setBingoCard(newBingoCard);
     setClickedTiles(Array(3).fill(null).map(() => Array(3).fill(false)));
+    setIsModalOpen(false);
+    
   };
 
   return (
@@ -60,9 +67,9 @@ const Bingo = () => {
               >
                 <div>
                   <div>{firstName}</div>
-                  {lastName && <div>{lastName}</div>} {/* Show last name if it exists */}
+                  {lastName && <div>{lastName}</div>}
                   <div>{company}</div>
-                  {position && <div>{position}</div>} {/* Show position if it exists */}
+                  {position && <div>{position}</div>}
                 </div>
               </div>
             );
@@ -73,7 +80,8 @@ const Bingo = () => {
       <button className="reset-button" onClick={resetGame}>
         Start New Game
       </button>
-      {isBingo() && <h2 className="bingo-alert">Bingo! Go Find Breevee!</h2>}
+      
+      <Modal isOpen={isModalOpen} onClose={resetGame} />
     </div>
   );
 };
