@@ -25,4 +25,6 @@ const GameDirections = () => {
       </div>
     </div>
   )
-}
+};
+
+export default GameDirections;

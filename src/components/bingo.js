@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../index.css';
 import Modal from './bingo-alert';
 
+
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
   card[1][1] = "Free"; 
