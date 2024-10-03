@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 import Modal from './bingo-alert';
+import  { Link } from 'react-router-dom';
 
 
 const generateBingoCard = () => {
@@ -51,6 +52,9 @@ const Bingo = () => {
   return (
     <div className="bingo container">
       <h1 className="bingo-title">Bingo</h1>
+      <Link to="/" className="link" >
+        How to win?
+      </Link>
       <div className="bingo-grid">
         {bingoCard.map((row, rowIndex) =>
           row.map((_, colIndex) => {
@@ -78,6 +82,8 @@ const Bingo = () => {
           })
         )}
       </div>
+
+      <p>Game ends at 7:30PM</p>
 
       <button className="reset-button" onClick={resetGame}>
         Start New Game

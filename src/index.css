@@ -21,7 +21,7 @@
    
   }
 
-  /* Game Directions */
+/* Game Directions */
   .directions {
     max-width:370px;
     width: 100%;
@@ -80,6 +80,17 @@
   color: #5B084A;
   font-size: 24px;
 }
+
+
+/* Footer */
+ .footer{
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+ }
+
 
 
 
