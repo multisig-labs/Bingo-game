@@ -71,8 +71,8 @@ const Bingo = () => {
 
   // Updated checkBingo function to prevent "L" shape from being a valid bingo
   const checkBingo = (tiles) => {
-    const isRowBingo = (row) => tiles[row].every((clicked) => clicked);
-    const isColumnBingo = (col) => tiles.every((row) => row[col]);
+    const isRowBingo = (row) => tiles[row].every((clicked) => clicked); // Check if entire row is clicked
+    const isColumnBingo = (col) => tiles.every((row) => row[col]); // Check if entire column is clicked
     const isDiagonalBingo = () => {
       // Main diagonal (top-left to bottom-right)
       const mainDiagonal = tiles[0][0] && tiles[1][1] && tiles[2][2];
