@@ -49,7 +49,7 @@ const Bingo = () => {
   };
 
   return (
-    <div className="bingo-container">
+    <div className="bingo container">
       <h1 className="bingo-title">Bingo</h1>
       <div className="bingo-grid">
         {bingoCard.map((row, rowIndex) =>

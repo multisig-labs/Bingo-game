@@ -1,33 +1,39 @@
-/* Bingo Card */
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
 
-html, body {
-  height: 100%;
-  margin:0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  html, body {
+    height: 100%;
+    margin:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.bingo-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-  max-width: 450px;
-  padding: 20px;
-  background-color: #EC6D6D ;
-  border-radius: 8px;
- 
- 
- 
-}
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 430px;
+    padding: 20px;
+    border-radius: 8px;
+   
+  }
+
+  /* Game Directions */
+  .directions {
+    max-width:370px;
+    width: 100%;
+  }
+
+
+/* Bingo Card */
 .bingo-title{
   font-size: 110px;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: white;
+  color: black;
   font-family: 'Signika', 'sans-serif';
   margin: 0;
 }
