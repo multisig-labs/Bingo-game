@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../index.css';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import FreeModal from './free-modal';
 
 
@@ -24,16 +24,34 @@ const names = [
 
 const Bingo = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+
+  // Statesfor the binog card and clicked tiles
   const [bingoCard, setBingoCard] = useState(generateBingoCard());
   const [clickedTiles, setClickedTiles] = useState(Array(3).fill(null).map(() => Array(3).fill(false)));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
+
+  useEffect(() => {
+    const savedClickedTiles = localStorage.getItem('clickedTiles');
+    const savedBingoCard = localStorage.getItem('bingoCard');
+
+    if (savedClickedTiles) {
+      setClickedTiles(JSON.parse(savedClickedTiles));
+    }
+    if (savedBingoCard) {
+      setBingoCard(JSON.parse(savedBingoCard));
+    }
+    }, []);
+
 
   const handleTileClick = (rowIndex, colIndex) => {
     const newClickedTiles = clickedTiles.map((row, rldx) =>
       row.map((clicked, cldx) => (rldx === rowIndex && cldx === colIndex ? !clicked : clicked))
     );
     setClickedTiles(newClickedTiles);
+    localStorage.setItem('clickedTiles', JSON.stringify(newClickedTiles));
 
     if (rowIndex === 1 && colIndex === 1) {
       //If the Free tile is clicked, show free Modal
@@ -46,7 +64,7 @@ const Bingo = () => {
   const checkBingo = (tiles) => {
     const clickedCount = tiles.flat().filter(Boolean).length; 
     if (clickedCount >= 3) {
-      navigate('/bingo-message');
+      navigate('/bingo-message', {state: {clickedTiles: tiles} });
      
     }
   };
@@ -57,7 +75,16 @@ const Bingo = () => {
     setClickedTiles(Array(3).fill(null).map(() => Array(3).fill(false)));
     setIsModalOpen(false);
     setIsFreeModalOpen(false);
+
+    //Clear game state from localStorage
+    localStorage.removeItem("bingoCard");
+    localStorage.removeItem("clickedTiles");
   };
+
+  // Save the bingoCard to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem("bingoCard", JSON.stringify(bingoCard));
+  }, [bingoCard]);
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
