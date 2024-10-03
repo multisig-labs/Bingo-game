@@ -20,6 +20,7 @@
     border-radius: 8px;
    
   }
+  
 
 /* Game Directions */
   .directions {
@@ -29,6 +30,20 @@
 
 
 /* Bingo Card */
+
+.bingo{
+  position: relative;
+
+}
+
+.link {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-decoration: none;
+  font-size: 16px;
+
+}
 .bingo-title{
   font-size: 110px;
   letter-spacing: 5px;
@@ -92,13 +107,20 @@
  }
 
 
-
+/* Styles for Free Tile Modal */
+.dont-post{
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+button{
+  margin: 8px;
+}
 
 
 
 
 /* Styles for Modal */
-
 .modal-overlay {
   position: fixed;
   left: 0;
@@ -144,6 +166,7 @@
   width: 350px;
   max-width: 70%;
   z-index: 1001;
+ 
 
 }
 .modal-button {
