@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../index.css';
-import Modal from './bingo-alert';
-import  { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import FreeModal from './free-modal';
 
 
@@ -24,6 +23,7 @@ const names = [
 ];
 
 const Bingo = () => {
+  const navigate = useNavigate();
   const [bingoCard, setBingoCard] = useState(generateBingoCard());
   const [clickedTiles, setClickedTiles] = useState(Array(3).fill(null).map(() => Array(3).fill(false)));
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,7 +46,8 @@ const Bingo = () => {
   const checkBingo = (tiles) => {
     const clickedCount = tiles.flat().filter(Boolean).length; 
     if (clickedCount >= 3) {
-      setIsModalOpen(true);
+      navigate('/bingo-message');
+     
     }
   };
 
@@ -99,7 +100,7 @@ const Bingo = () => {
         Start New Game
       </button>
       
-      <Modal isOpen={isModalOpen} onClose={resetGame}/>
+      
       <FreeModal isOpen={isFreeModalOpen} onClose={() => 
         setIsFreeModalOpen(false)} />
     </div>
