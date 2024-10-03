@@ -3,10 +3,10 @@ import '../index.css';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import FreeModal from './free-modal';
 
-
+// Generates a 3x3 bingo card with a Free space in the center
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
-  card[1][1] = "Free"; 
+  card[1][1] = "Free"; // Set the Free space in the middle
   return card;
 };
 
@@ -26,47 +26,81 @@ const Bingo = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Retrieve bingoCard and clickedTiles from localStorage, or generate new ones if not present
+  const [bingoCard, setBingoCard] = useState(() => {
+    const savedBingoCard = localStorage.getItem("bingoCard");
+    return savedBingoCard ? JSON.parse(savedBingoCard) : generateBingoCard();
+  });
 
-  // Statesfor the binog card and clicked tiles
-  const [bingoCard, setBingoCard] = useState(generateBingoCard());
-  const [clickedTiles, setClickedTiles] = useState(Array(3).fill(null).map(() => Array(3).fill(false)));
+  const [clickedTiles, setClickedTiles] = useState(() => {
+    const savedClickedTiles = localStorage.getItem("clickedTiles");
+    return savedClickedTiles ? JSON.parse(savedClickedTiles) : Array(3).fill(null).map(() => Array(3).fill(false));
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
 
+  // Restore clickedTiles if state is passed from BingoMessage (after winning)
   useEffect(() => {
-    const savedClickedTiles = localStorage.getItem('clickedTiles');
-    const savedBingoCard = localStorage.getItem('bingoCard');
-
-    if (savedClickedTiles) {
-      setClickedTiles(JSON.parse(savedClickedTiles));
+    if (location.state && location.state.clickedTiles) {
+      setClickedTiles(location.state.clickedTiles);
     }
-    if (savedBingoCard) {
-      setBingoCard(JSON.parse(savedBingoCard));
-    }
-    }, []);
-
+  }, [location.state]);
 
   const handleTileClick = (rowIndex, colIndex) => {
     const newClickedTiles = clickedTiles.map((row, rldx) =>
       row.map((clicked, cldx) => (rldx === rowIndex && cldx === colIndex ? !clicked : clicked))
     );
     setClickedTiles(newClickedTiles);
-    localStorage.setItem('clickedTiles', JSON.stringify(newClickedTiles));
 
     if (rowIndex === 1 && colIndex === 1) {
-      //If the Free tile is clicked, show free Modal
+      // If the Free tile is clicked, show free Modal
       setIsFreeModalOpen(true);
     } else {
-    checkBingo(newClickedTiles);
+      // Check Bingo with updated rules
+      if (checkBingo(newClickedTiles)) {
+        // Save full game state (including the winning clickedTiles) to localStorage
+        localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
+        navigate('/bingo-message', { state: { clickedTiles: newClickedTiles } });
+      } else {
+        // If no Bingo, save the current clickedTiles to localStorage
+        localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
+      }
     }
   };
 
+  // Updated checkBingo function to prevent "L" shape from being a valid bingo
   const checkBingo = (tiles) => {
-    const clickedCount = tiles.flat().filter(Boolean).length; 
-    if (clickedCount >= 3) {
-      navigate('/bingo-message', {state: {clickedTiles: tiles} });
-     
+    const isRowBingo = (row) => tiles[row].every((clicked) => clicked);
+    const isColumnBingo = (col) => tiles.every((row) => row[col]);
+    const isDiagonalBingo = () => {
+      // Main diagonal (top-left to bottom-right)
+      const mainDiagonal = tiles[0][0] && tiles[1][1] && tiles[2][2];
+      // Anti-diagonal (top-right to bottom-left)
+      const antiDiagonal = tiles[0][2] && tiles[1][1] && tiles[2][0];
+      return mainDiagonal || antiDiagonal;
+    };
+
+    // Check if any row is completely clicked
+    for (let row = 0; row < 3; row++) {
+      if (isRowBingo(row)) {
+        return true; // Row bingo found
+      }
     }
+
+    // Check if any column is completely clicked
+    for (let col = 0; col < 3; col++) {
+      if (isColumnBingo(col)) {
+        return true; // Column bingo found
+      }
+    }
+
+    // Check diagonals
+    if (isDiagonalBingo()) {
+      return true; // Diagonal bingo found
+    }
+
+    return false; // No bingo found
   };
 
   const resetGame = () => {
@@ -76,19 +110,20 @@ const Bingo = () => {
     setIsModalOpen(false);
     setIsFreeModalOpen(false);
 
-    //Clear game state from localStorage
+    // Clear game state from localStorage
     localStorage.removeItem("bingoCard");
     localStorage.removeItem("clickedTiles");
   };
 
-  // Save the bingoCard to localStorage when it changes
+  // Save bingoCard and clickedTiles to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("bingoCard", JSON.stringify(bingoCard));
-  }, [bingoCard]);
+    localStorage.setItem("clickedTiles", JSON.stringify(clickedTiles));
+  }, [bingoCard, clickedTiles]);
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
-      <Link to="/" className="link" >
+      <Link to="/" className="link">
         How to win?
       </Link>
       <h2>GoGopool and Uplink present</h2>
@@ -126,10 +161,8 @@ const Bingo = () => {
       <button className="reset-button" onClick={resetGame}>
         Start New Game
       </button>
-      
-      
-      <FreeModal isOpen={isFreeModalOpen} onClose={() => 
-        setIsFreeModalOpen(false)} />
+
+      <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />
     </div>
   );
 };
