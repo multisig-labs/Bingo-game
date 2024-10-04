@@ -47,28 +47,39 @@ const Bingo = () => {
     }
   }, [location.state]);
 
+
   const handleTileClick = (rowIndex, colIndex) => {
+    // Update the clickedTiles state with the new tile click
     const newClickedTiles = clickedTiles.map((row, rldx) =>
       row.map((clicked, cldx) => (rldx === rowIndex && cldx === colIndex ? !clicked : clicked))
     );
     setClickedTiles(newClickedTiles);
-
+  
+    // Check if the Free space is clicked, if yes, show Free Modal
     if (rowIndex === 1 && colIndex === 1) {
-      // If the Free tile is clicked, show free Modal
       setIsFreeModalOpen(true);
     } else {
-      // Check Bingo with updated rules
-      if (checkBingo(newClickedTiles)) {
-        // Save full game state (including the winning clickedTiles) to localStorage
-        localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
-        navigate('/bingo-message', { state: { clickedTiles: newClickedTiles } });
+      // Check if the entire card is fully clicked (blackout condition)
+      const isCardFullyClicked = newClickedTiles.every(row => row.every(tile => tile === true));
+  
+      if (isCardFullyClicked) {
+        // Navigate to Winning Page when the card is fully clicked (blackout)
+        navigate('/winner', { state: { clickedTiles: newClickedTiles } });
       } else {
-        // If no Bingo, save the current clickedTiles to localStorage
-        localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
+        // Check for a Bingo in any row, column, or diagonal
+        if (checkBingo(newClickedTiles)) {
+          // If there's a Bingo, save the clickedTiles to localStorage and navigate to Bingo Message
+          localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
+          navigate('/bingo-message', { state: { clickedTiles: newClickedTiles } });
+        } else {
+          // If no Bingo and not a blackout, just save the current clickedTiles to localStorage
+          localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
+        }
       }
     }
   };
-
+  
+  
   // Updated checkBingo function to prevent "L" shape from being a valid bingo
   const checkBingo = (tiles) => {
     const isRowBingo = (row) => tiles[row].every((clicked) => clicked); // Check if entire row is clicked
