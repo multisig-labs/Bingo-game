@@ -43,7 +43,7 @@ const LoginPage = () => {
       
 
       <button type="submit" className="login-button">
-        Login with Twitter Handle
+        Continue
       </button>
     </form> 
   </div>

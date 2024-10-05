@@ -151,10 +151,6 @@ button{
   margin: 20px 0;
   color: #333;
 }
-.modal-body p{
-  color: orangered;
-  text-align: center;
-}
 
 .modal-content{
   position: relative;

@@ -1,7 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const BingoMessage = () => {
+const BingoMessage = ({close}) => {
+  const navigate = useNavigate();
+
+  const handleBackToBingo = () => {
+    close();
+    navigate('/bingo');
+  
+};
+
   return (
     <div className="bingo-message">
       <h2>GoGopool and Uplink present</h2>
@@ -10,9 +18,9 @@ const BingoMessage = () => {
       <h3>Bingo!</h3>
       <p>The game isn't over! Find Breevie now and 
         show him your squares and selfies.</p>
-      <Link to="/bingo" className="keep-playing-button">
+      <button className="keep-playing-button" onClick={handleBackToBingo}>
         Oops, I was wrong. Keep playing.
-      </Link>
+      </button>
     </div>
   );
 };

@@ -1,11 +1,18 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const WinnerPage = () => {
-  const location = useLocation();
+  // State to hold the winner's Twitter handle
+  const [twitterHandle, setTwitterHandle] = useState('');
 
-  // Retrieve the Twitter handle from localStorage
-  const twitterHandle = location.state?.twitterHandle;
+  useEffect(() => {
+    // Get the Twitter handle from localStorage
+    const handle = localStorage.getItem('twitterHandle');
+
+    if (handle) {
+      // If it's stored, update the state
+      setTwitterHandle(handle);
+    }
+  }, []); // Empty dependency array ensures this runs only once after component mounts
 
   return (
     <div className="winner-page container">
@@ -21,4 +28,3 @@ const WinnerPage = () => {
 };
 
 export default WinnerPage;
-
