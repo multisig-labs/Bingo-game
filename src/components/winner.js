@@ -8,7 +8,7 @@ const WinnerPage = () => {
   const twitterHandle = location.state?.twitterHandle;
 
   return (
-    <div className="winner-page">
+    <div className="winner-page container">
       <h1>Congratulations!</h1>
       {twitterHandle ? (
         <p>You won, {twitterHandle}!</p>

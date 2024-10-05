@@ -16,14 +16,14 @@ const LoginPage = () => {
       localStorage.setItem('twitterHandle', twitterHandle);
     
 
-    navigate('./bingo');
+    navigate('./game-directions');
   }else{
     alert('Please enter your Twitter handle');
   }
 };
 
   return(
-    <div className="login-page">
+    <div className="login-page container">
       <h1>Login Page</h1>
       <p>Login with twitter</p>
 

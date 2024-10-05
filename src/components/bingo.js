@@ -150,7 +150,7 @@ const Bingo = () => {
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
-      <Link to="/" className="link">How to win?</Link>
+      <Link to="/game-directions" className="link">How to win?</Link>
       <h2>GoGopool and Uplink present</h2>
       <h1 className="bingo-title">Bingo</h1>
       <div className="intro">
