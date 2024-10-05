@@ -26,7 +26,6 @@ const Bingo = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Retrieve bingoCard and clickedTiles from localStorage, or generate new ones if not present
   const [bingoCard, setBingoCard] = useState(() => {
     const savedBingoCard = localStorage.getItem("bingoCard");
     return savedBingoCard ? JSON.parse(savedBingoCard) : generateBingoCard();
@@ -37,6 +36,8 @@ const Bingo = () => {
     return savedClickedTiles ? JSON.parse(savedClickedTiles) : Array(3).fill(null).map(() => Array(3).fill(false));
   });
 
+  const [bingoCount, setBingoCount] = useState(0); // Track number of Bingos
+  const [bingoTiles, setBingoTiles] = useState([]); // Track tiles involved in Bingo
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
 
@@ -47,81 +48,96 @@ const Bingo = () => {
     }
   }, [location.state]);
 
-
   const handleTileClick = (rowIndex, colIndex) => {
-    // Update the clickedTiles state with the new tile click
+    if (clickedTiles[rowIndex][colIndex]) return; // Ignore clicks on already clicked tiles
+
     const newClickedTiles = clickedTiles.map((row, rldx) =>
-      row.map((clicked, cldx) => (rldx === rowIndex && cldx === colIndex ? !clicked : clicked))
+      row.map((clicked, cldx) => (rldx === rowIndex && cldx === colIndex ? true : clicked))
     );
     setClickedTiles(newClickedTiles);
-  
-    // Check if the Free space is clicked, if yes, show Free Modal
+
     if (rowIndex === 1 && colIndex === 1) {
-      setIsFreeModalOpen(true);
+      setIsFreeModalOpen(true); // Show the Free modal when Free space is clicked
     } else {
-      // Check if the entire card is fully clicked (blackout condition)
       const isCardFullyClicked = newClickedTiles.every(row => row.every(tile => tile === true));
-  
+
       if (isCardFullyClicked) {
-        // Navigate to Winning Page when the card is fully clicked (blackout)
-        navigate('/winner', { state: { clickedTiles: newClickedTiles } });
+        // If the card is fully clicked (blackout), navigate to Winner page
+        // Get the twitter handle from localStorage
+        const twitterHandle = localStorage.getItem("twitterHandle");
+        navigate('/winner', { state: { twitterHandle } });
       } else {
-        // Check for a Bingo in any row, column, or diagonal
-        if (checkBingo(newClickedTiles)) {
-          // If there's a Bingo, save the clickedTiles to localStorage and navigate to Bingo Message
+        // Check for new Bingos after every click
+        const { newBingoCount, newBingoTiles } = findBingos(newClickedTiles);
+        if (newBingoCount > bingoCount) {
+          // If a new Bingo is found, update the count and display the Bingo message
+          setBingoCount(newBingoCount);
+          setBingoTiles(newBingoTiles);
           localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
-          navigate('/bingo-message', { state: { clickedTiles: newClickedTiles } });
+          navigate('/bingo-message', { state: { clickedTiles: newClickedTiles, bingoTiles: newBingoTiles } });
         } else {
-          // If no Bingo and not a blackout, just save the current clickedTiles to localStorage
+          // Save current state without Bingo
           localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
         }
       }
     }
   };
-  
-  
-  // Updated checkBingo function to prevent "L" shape from being a valid bingo
-  const checkBingo = (tiles) => {
-    const isRowBingo = (row) => tiles[row].every((clicked) => clicked); // Check if entire row is clicked
-    const isColumnBingo = (col) => tiles.every((row) => row[col]); // Check if entire column is clicked
+
+  // Find how many Bingos are there in the current clickedTiles
+  const findBingos = (tiles) => {
+    let bingoCount = 0;
+    let newBingoTiles = [];
+
+    const isRowBingo = (row) => {
+      return tiles[row].every((clicked, colIdx) => clicked || tiles[row][colIdx] === "Free");
+    };
+
+    const isColumnBingo = (col) => {
+      return tiles.every(row => row[col] || row[col] === "Free"); // Consider Free space
+    };
+
     const isDiagonalBingo = () => {
       // Main diagonal (top-left to bottom-right)
       const mainDiagonal = tiles[0][0] && tiles[1][1] && tiles[2][2];
       // Anti-diagonal (top-right to bottom-left)
-      const antiDiagonal = tiles[0][2] && tiles[1][1] && tiles[2][0];
+      const antiDiagonal = tiles[1][1] && tiles[2][0] && tiles[0][2];
       return mainDiagonal || antiDiagonal;
     };
 
-    // Check if any row is completely clicked
+    // Check rows for Bingo
     for (let row = 0; row < 3; row++) {
       if (isRowBingo(row)) {
-        return true; // Row bingo found
+        bingoCount += 1;
+        newBingoTiles = newBingoTiles.concat(tiles[row].map((_, colIdx) => `Row ${row}, Col ${colIdx}`));
       }
     }
 
-    // Check if any column is completely clicked
+    // Check columns for Bingo
     for (let col = 0; col < 3; col++) {
       if (isColumnBingo(col)) {
-        return true; // Column bingo found
+        bingoCount += 1;
+        newBingoTiles = newBingoTiles.concat(tiles.map((row, rowIdx) => `Row ${rowIdx}, Col ${col}`));
       }
     }
 
-    // Check diagonals
+    // Check diagonals for Bingo
     if (isDiagonalBingo()) {
-      return true; // Diagonal bingo found
+      bingoCount += 1;
+      newBingoTiles = newBingoTiles.concat(["Main Diagonal", "Anti-Diagonal"]);
     }
 
-    return false; // No bingo found
+    return { newBingoCount: bingoCount, newBingoTiles };
   };
 
   const resetGame = () => {
     const newBingoCard = generateBingoCard();
     setBingoCard(newBingoCard);
     setClickedTiles(Array(3).fill(null).map(() => Array(3).fill(false)));
+    setBingoCount(0); // Reset bingo count
+    setBingoTiles([]); // Reset bingo tiles
     setIsModalOpen(false);
     setIsFreeModalOpen(false);
 
-    // Clear game state from localStorage
     localStorage.removeItem("bingoCard");
     localStorage.removeItem("clickedTiles");
   };
@@ -134,11 +150,13 @@ const Bingo = () => {
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
-      <Link to="/" className="link">
-        How to win?
-      </Link>
+      <Link to="/" className="link">How to win?</Link>
       <h2>GoGopool and Uplink present</h2>
       <h1 className="bingo-title">Bingo</h1>
+      <div className="intro">
+        <p>Network with people around you to find the folks in the square. To win, complete a three in a row horizontal, vertical , or diagonal.</p>
+        <h3>Good Luck!</h3>
+      </div>
       <div className="bingo-grid">
         {bingoCard.map((row, rowIndex) =>
           row.map((_, colIndex) => {
@@ -151,7 +169,7 @@ const Bingo = () => {
               >
                 <div>
                   {clickedTiles[rowIndex][colIndex] ? (
-                    '' // Render nothing if clicked
+                    '' 
                   ) : (
                     <>
                       <div>{firstName}</div>
@@ -166,16 +184,12 @@ const Bingo = () => {
           })
         )}
       </div>
-
       <p>Game ends at 7:30PM</p>
-
-      <button className="reset-button" onClick={resetGame}>
-        Start New Game
-      </button>
-
+      <button className="reset-button" onClick={resetGame}>Start New Game</button>
       <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />
     </div>
   );
 };
 
 export default Bingo;
+

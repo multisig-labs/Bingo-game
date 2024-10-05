@@ -1,28 +1,24 @@
 import React from 'react';
-import { useLocation, useNavigate} from 'react-router-dom';
-import Footer from './footer';
+import { useLocation } from 'react-router-dom';
 
-const WinningPage = () => {
+const WinnerPage = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const {clickedTiles} = location.state || {};
-
-  //Check if the Bingo card is fully clicked
-  const isCardFullyClicked = clickedTiles && clickedTiles.every(row => row.every(tile => tile === true));
-
-  if (!isCardFullyClicked) {
-    navigate('/');
-    return null;
-  }
+  // Retrieve the Twitter handle from localStorage
+  const twitterHandle = location.state?.twitterHandle;
 
   return (
-    <div className="winner">
+    <div className="winner-page">
       <h1>Congratulations!</h1>
-      <p>You've completed a full blackout Bingo!</p>
-      <p>All tiles on your Bingo card have been clicked.</p>
+      {twitterHandle ? (
+        <p>You won, {twitterHandle}!</p>
+      ) : (
+        <p>You won, but we couldn't retrieve your Twitter handle.</p>
+      )}
+      <button onClick={() => window.location.href = '/'}>Go Back to Home</button>
     </div>
   );
 };
 
-export default WinningPage;
+export default WinnerPage;
+

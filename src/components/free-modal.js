@@ -4,9 +4,9 @@ import '../index.css';
 const FreeModal = ({ isOpen, onClose}) => {
   if (!isOpen) return null;
 
-  const openTwitter = () => {
-    window.open('https://twitter.com/yourtwitterhandle', '_blank');
-  }
+  const twitterHandle = localStorage.getItem('twitterHandle');
+
+  if (!twitterHandle) {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -20,6 +20,28 @@ const FreeModal = ({ isOpen, onClose}) => {
       </div>
     </div>
   );
+}
+
+const openTwitter = () => {
+  const tweetText = `I just got the Free Square in Bingo! #BingGame @GoGoPool_@${twitterHandle}`;
+
+  const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+
+  window.open(tweetUrl, '_blank');
+};
+
+return (
+  <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <h2>Free Square.</h2>
+      <p>Post a fun tweet on X and mention @GoGoPool_.
+        Be sure to show your tweet to Breevie if you get Bingo!
+      </p>
+      <button className="dont-post" onClick={onClose}>I don't want to post</button>
+      <button onClick={openTwitter}>Post Now!</button>
+    </div>
+  </div>
+);
 };
 
 export default FreeModal;
