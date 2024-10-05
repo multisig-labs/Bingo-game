@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import FreeModal from './free-modal';
 import BingoMessage from './bingo-message'; 
+import Footer from './assets/images/footer.jsx';
 import '../index.css';
 
 const generateBingoCard = () => {
@@ -165,6 +166,7 @@ const Bingo = () => {
       {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
       {blackout && <p>Game Over! You have achieved Blackout!</p>}
       <button className="reset-button" onClick={resetGame}>Start New Game</button>
+      <Footer/>
 
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}
 

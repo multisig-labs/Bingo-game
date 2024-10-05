@@ -12,7 +12,7 @@ const GameDirections = () => {
   };
 
   return(
-    <div className="container ">
+    <div className="container">
       <h2>GoGopool and Uplink present</h2>
       <h1>Bingo Logo</h1>
       <p>Welcome to Blocktail's Bingo Game</p>

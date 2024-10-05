@@ -18,6 +18,11 @@
     max-width: 430px;
     padding: 20px;
     border-radius: 8px;
+    background-image: url('./assets/images/Background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
    
   }
   
@@ -107,20 +112,13 @@
  }
 
 
-/* Styles for Free Tile Modal */
+/* Modals*/
 .dont-post{
   border: none;
   background-color: #fff;
   cursor: pointer;
 }
-button{
-  margin: 8px;
-}
 
-
-
-
-/* Styles for Modal */
 .modal-overlay {
   position: fixed;
   left: 0;

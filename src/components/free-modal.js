@@ -11,7 +11,7 @@ const FreeModal = ({ isOpen, onClose}) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <h2>Free Square.</h2>
+        <h2>Free Square</h2>
         <p>Post a fun tweet on X and mention @GoGoPool_.
           Be sure to show your tweet to Breevie if you get Bingo!
         </p>

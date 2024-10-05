@@ -6,7 +6,7 @@ import Bingo from './components/bingo';
 import BingoMessage from './components/bingo-message';
 import Winner from './components/winner';
 import Footer from './components/footer';
-import './App.css';
+import './index.css';
 
 
 function App() {
