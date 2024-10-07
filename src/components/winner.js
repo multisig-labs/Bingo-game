@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Footer from '../assets/images/footer';
 
 const WinnerPage = () => {
   // State to hold the winner's Twitter handle
@@ -12,7 +13,7 @@ const WinnerPage = () => {
       // If it's stored, update the state
       setTwitterHandle(handle);
     }
-  }, []); // Empty dependency array ensures this runs only once after component mounts
+  }, []); 
 
   return (
     <div className="winner-page container">
@@ -23,6 +24,7 @@ const WinnerPage = () => {
         <p>You won, but we couldn't retrieve your Twitter handle.</p>
       )}
       <button onClick={() => window.location.href = '/'}>Go Back to Home</button>
+      <Footer/>
     </div>
   );
 };

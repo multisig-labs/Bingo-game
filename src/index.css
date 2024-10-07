@@ -17,7 +17,6 @@
     width: 100%;
     max-width: 430px;
     padding: 20px;
-    border-radius: 8px;
     background-image: url('./assets/images/Background.png');
     background-size: cover;
     background-position: center;
@@ -25,6 +24,8 @@
 
    
   }
+  /* Login page */
+  
   
 
 /* Game Directions */

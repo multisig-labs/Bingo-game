@@ -5,7 +5,6 @@ import GameDirections from './components/game-directions';
 import Bingo from './components/bingo'; 
 import BingoMessage from './components/bingo-message';
 import Winner from './components/winner';
-import Footer from './components/footer';
 import './index.css';
 
 
@@ -19,7 +18,6 @@ function App() {
         <Route path="/bingo-message" element={<BingoMessage/>} />
         <Route path="/winner" element={<Winner />} />
       </Routes>
-      <Footer />
     </Router>
   );
 };

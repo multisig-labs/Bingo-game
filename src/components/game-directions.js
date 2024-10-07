@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
+import Footer from '../assets/images/footer';
 
 
 const GameDirections = () => {
@@ -25,6 +26,7 @@ const GameDirections = () => {
         <button className="accept-btn" onClick={handleAcceptRules}>
           I understand, and I'm ready to play!
         </button>
+        <Footer/>
       </div>
     </div>
   )

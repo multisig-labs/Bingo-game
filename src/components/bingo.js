@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import FreeModal from './free-modal';
 import BingoMessage from './bingo-message'; 
-import Footer from './assets/images/footer.jsx';
+import Footer from '../assets/images/footer';
 import '../index.css';
 
 const generateBingoCard = () => {
