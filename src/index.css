@@ -1,31 +1,164 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap');
+ *{
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+ }
 
   html, body {
     height: 100%;
     margin:0;
-    display: flex;
+    padding:0;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
     justify-content: center;
     width: 100%;
-    max-width: 430px;
+    max-width: 390px;
+    height: 100vh;
     padding: 20px;
     background-image: url('./assets/images/Background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
 
+   .welcome{
+    margin-bottom: 30px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 800;
+   
+   }
+   .login-header{
+    margin-top: 50px;
+   }
+   
+   .line {
+    width: 100%;
+    height: 5.27px;
+    margin:20px 0;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    mix-blend-mode: soft-light;
+   }
+   .line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5.27px;
+    background: #ffffff;
+    mix-blend-mode: soft-light;
+
+   }
+   .sponsors{
+    width: 100%;
+    max-width: 390px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+  }
+  
+  /* Login page */
+  .login-form{
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 30px;
+  margin: 20px 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 330px;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  }
+
+
+  .login-form h2{
+    font-size: 14.5px;
+    color: #fff;
+    margin-bottom: 50px;
+    font-weight:600;
+    text-transform: uppercase;
+  }
+
+  .login-form p{
+    font-size: 14px;
+    color: #fff;
+    font-weight:700;
+    margin-bottom: 30px;
+  }
+
+
+  .twitter-handle-label{
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-weight:bold;
+    text-align: left;
+    width: 100%;
+   
+
+  } 
+  /* this is temporary ID #twitter-handle2 until wallet is set up */
+
+  #twitter-handle2{
+    margin-bottom:50px;
+  }
+
+  .twitter-handle-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6.89px;
+    font-size: 14px;
+    outline: none;
+    color: #fff;
+    background-color: #df5454;
+    transition: all 0.3s ease;
+   
+  
    
   }
-  /* Login page */
-  
+  .twitter-handle-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    
+  }
+ 
+  .login-button {
+    width: 300px;
+    height: 76px;
+    background-color: #df5454;
+    color: #fff;
+    border:none;
+    border-radius: 8.92px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .login-button:hover{
+    background-color: rgb
+    (209, 83, 83, 0.2 );
+  }
   
 
 /* Game Directions */

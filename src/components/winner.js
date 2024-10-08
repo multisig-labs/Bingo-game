@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../assets/images/footer';
+import Footer from '../assets/images/sponsors-img';
 
 const WinnerPage = () => {
   // State to hold the winner's Twitter handle

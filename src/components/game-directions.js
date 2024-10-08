@@ -1,7 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
-import Footer from '../assets/images/footer';
+
+
+//Images
+import HeaderImg from '../assets/images/header-img';
+import BingoIcon from '../assets/images/bingo-logo';
+import Footer from '../assets/images/sponsors-img';
 
 
 const GameDirections = () => {
@@ -14,9 +19,11 @@ const GameDirections = () => {
 
   return(
     <div className="container">
-      <h2>GoGopool and Uplink present</h2>
-      <h1>Bingo Logo</h1>
-      <p>Welcome to Blocktail's Bingo Game</p>
+      <HeaderImg/>
+      <div className="line"></div>
+      <BingoIcon/>
+      <h1 className="welcome">Welcome to Blocktail's Bingo Game</h1>
+      
 
       <div className="directions">
         <h3 className="sub-heading"> Here's how to win</h3>

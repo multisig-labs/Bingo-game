@@ -4,7 +4,7 @@ function BingoIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="487"
+      width="387"
       height="118"
       fill="none"
       viewBox="0 0 487 118"
