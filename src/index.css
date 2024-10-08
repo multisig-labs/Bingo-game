@@ -20,10 +20,8 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-image: url('./assets/images/Background.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(135deg, #411f56, #ea5d5d, #f0a1a1);
+    
   }
 
    .welcome{
