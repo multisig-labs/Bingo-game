@@ -9,10 +9,8 @@
   padding: 0; 
   align-items: center;
   margin: 0 auto;
-  overflow-x: hidden;
+ 
   
- 
- 
   
 }
 
@@ -73,10 +71,14 @@
   
   /* Login page */
   
+  .login-form{
+    box-sizing: content-box;
+  }
+
   .login-form,
   .directions{
   display: flex;
-  padding: 55px;
+  padding: 30px;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.2);
   margin: 20px 20px 40px;
@@ -134,6 +136,7 @@
     color: #fff;
     background-color: #df5454;
     transition: all 0.3s ease;
+    box-sizing: border-box;
    
   
    
