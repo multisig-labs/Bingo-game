@@ -73,12 +73,15 @@
   
   .login-form{
     box-sizing: content-box;
+    padding: 30px;
+  }
+  .directions{
+    padding: 40px;
   }
 
   .login-form,
   .directions{
   display: flex;
-  padding: 30px;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.2);
   margin: 20px 20px 40px;
@@ -174,9 +177,9 @@
   
   .inner-directions{
     background: #df5454;
-    width: 325px;
+    width: 395px;
     color: #fff;
-    padding: 20px 35px;
+    padding: 4px 10px;
     border-radius: 8px;
     max-width: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -195,10 +198,13 @@
   .inner-directions p{
     color: white;
     letter-spacing: 1px;
-    text-align: justify;
+    text-align: center;
+    margin-bottom: 20px;
+    
   }
 
   .directions p:nth-of-type(2){
+    margin-top: 20px;
     text-align: center;
     
   }
