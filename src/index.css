@@ -76,7 +76,7 @@
     padding: 30px;
   }
   .directions{
-    padding: 40px;
+    padding: 60px;
   }
 
   .login-form,
@@ -107,7 +107,7 @@
     font-size: 14px;
     color: #fff;
     font-weight:700;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
 
@@ -169,21 +169,16 @@
   
 
 /* Game Directions */
-  .directions {
-    margin-bottom: 175px;
-    
-    
-  }
-  
   .inner-directions{
-    background: #df5454;
-    width: 395px;
+    width: 385px;
     color: #fff;
-    padding: 4px 10px;
+    padding: 25px;
     border-radius: 8px;
-    max-width: 350px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 45px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+
 
   }
   .how-to-win{
@@ -195,14 +190,7 @@
     font-weight: 600;
   }
  
-  .inner-directions p{
-    color: white;
-    letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 20px;
-    
-  }
-
+  
   .directions p:nth-of-type(2){
     margin-top: 20px;
     text-align: center;
@@ -233,23 +221,6 @@
 .bingo{
   position: relative;
 
-}
-
-.link {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  text-decoration: none;
-  font-size: 16px;
-
-}
-.bingo-title{
-  font-size: 110px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: black;
-  font-family: 'Signika', 'sans-serif';
-  margin: 0;
 }
 
 
@@ -289,13 +260,6 @@
 .reset-button{
   margin: 20px;
 }
-
-.bingo-alert{
-  color: #5B084A;
-  font-size: 24px;
-}
-
-
 
 
 /* Modals*/
@@ -363,10 +327,6 @@
   white-space: normal;
   padding: 6px 15px;
 
-}
- span.text-message{
-  font-weight: bold;
-  color: #BF4061;
 }
 
 
