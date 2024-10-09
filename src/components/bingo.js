@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-
-
-import FreeModal from './free-modal';
-import BingoMessage from './bingo-message'; 
-import Sponsors from '../assets/images/sponsors-img';
+import { useNavigate } from 'react-router-dom';
 import '../index.css';
+import FreeModal from './free-modal';
+import BingoMessage from './bingo-message';
+
+
+
+//Images
+import Sponsors from '../assets/images/sponsors-img';
+import HeaderImg from '../assets/images/header-img';
+import BingoIcon from '../assets/images/bingo-logo';
+
 
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
@@ -26,7 +31,7 @@ const names = [
 ];
 
 const Bingo = () => {
-  const navigate = useNavigate();  // Used for navigation
+  const navigate = useNavigate();
   const [bingoCard, setBingoCard] = useState(() => {
     const savedBingoCard = localStorage.getItem("bingoCard");
     return savedBingoCard ? JSON.parse(savedBingoCard) : generateBingoCard();
@@ -42,7 +47,7 @@ const Bingo = () => {
   const [gameOver, setGameOver] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);  
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
-  const [blackout, setBlackout] = useState(false); // New state for blackout
+  const [blackout, setBlackout] = useState(false); 
 
   const handleTileClick = (rowIndex, colIndex) => {
     if (clickedTiles[rowIndex][colIndex] || gameOver) return;
@@ -131,9 +136,9 @@ const Bingo = () => {
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
-      <Link to="/game-directions" className="link">How to win?</Link>
-      <h2>GoGopool and Uplink present</h2>
-      <h1 className="bingo-title">Bingo</h1>
+      <HeaderImg/>
+      <div className="line"></div>
+      <BingoIcon/>
       <div className="intro">
         <p>Network with people around you to find the folks in the square. To win, complete a three in a row horizontal, vertical, or diagonal.</p>
         <h3>Good Luck!</h3>

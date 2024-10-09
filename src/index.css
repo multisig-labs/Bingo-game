@@ -183,7 +183,7 @@
     border-radius: 8px;
     max-width: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 60px;
+    margin-bottom: 45px;
 
   }
   .how-to-win{
@@ -337,7 +337,8 @@
 .btn-container{
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
+  
 }
 .post-now {
   background-color: #F48F8C;

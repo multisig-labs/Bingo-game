@@ -15,8 +15,10 @@ const FreeModal = ({ isOpen, onClose}) => {
         <p>Post a fun tweet on X and mention @GoGoPool_.
           Be sure to show your tweet to Breevie if you get Bingo!
         </p>
-        <button className="dont-post-btn" onClick={onClose}>I don't want to post</button>
-        <button className="open-twitter-btn" onClick={openTwitter}>Post Now!</button>
+        <div className="btn-container">
+          <button className="dont-post-btn" onClick={onClose}>I don't want to post</button>
+          <button className="open-twitter-btn" onClick={openTwitter}>Post Now!</button>
+        </div>
       </div>
     </div>
   );
