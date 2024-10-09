@@ -320,7 +320,7 @@
 }
 
 .modal-content button{
-  margin: 8px;
+  margin: 7px;
 }
 .post-now {
   background-color: #F48F8C;
@@ -341,9 +341,12 @@
   color: #ED6F90;
   font-weight: 400;
 }
- span.no-post-span{
-  word-wrap: break-word;
+ span.text-message{
+  font-weight: bold;
+  color: #BF4061;
 }
+
+
 
 
 

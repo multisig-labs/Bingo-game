@@ -34,10 +34,10 @@ return (
   <div className="modal-overlay" onClick={onClose}>
     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
       <h2>Free Square.</h2>
-      <p>Post a fun tweet on X and mention @GoGoPool_.
+      <p>Post a fun tweet on X and mention <span className="tweet-message">@GoGoPool_.</span>
         Be sure to show your tweet to Breevie if you get Bingo!
       </p>
-      <button className="dont-post" onClick={onClose}>I Don't Want<span className="no-post-span">To Post</span></button>
+      <button className="dont-post" onClick={onClose}>I Don't Want To Post</button>
       <button className="post-now" onClick={openTwitter}>Post Now!</button>
     </div>
   </div>
