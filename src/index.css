@@ -9,6 +9,9 @@
   padding: 0; 
   align-items: center;
   margin: 0 auto;
+  overflow-x: hidden;
+  
+ 
  
   
 }
@@ -20,6 +23,10 @@
     justify-content: center;
     padding: 20px;
     background: linear-gradient(135deg, #411f56, #ea5d5d, #f0a1a1);
+    
+    
+
+    
     
   }
 
@@ -309,36 +316,43 @@
   width: 350px;
   max-width: 70%;
   z-index: 1001;
-  color:#F48F8C;
+  color:#BC0E3B;
  
 
 }
 .modal-content h2{
   text-transform: uppercase;
-  color: #F48F8C;
+  color: #c54b6b;
 }
 
-.modal-content button{
-  margin: 7px;
+.btn-container{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 .post-now {
   background-color: #F48F8C;
   color: white;
+  padding: 14px 25px;
+ 
 
 }
 .post-now,
 .dont-post{
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   border: none;
-  padding: 14px 25px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+  align-items: center;
 }
 .dont-post {
   background: linear-gradient(360deg, hsla(349, 84%, 95%, 1) 30%, hsla(33, 73%, 94%, 1) 100%, hsla(288, 100%, 81%, 1) 100%);
-  color: #ED6F90;
+  color: #BC0E3B;
   font-weight: 400;
+  white-space: normal;
+  padding: 6px 15px;
+
 }
  span.text-message{
   font-weight: bold;
