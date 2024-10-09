@@ -281,22 +281,9 @@
 }
 
 
-/* Footer */
- .footer{
-  text-align: center;
-  padding: 10px 0;
-  position: relative;
-  bottom: 0;
-  width: 100%;
- }
 
 
 /* Modals*/
-.dont-post{
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
-}
 
 .modal-overlay {
   position: fixed;
@@ -304,71 +291,67 @@
   top:0;
   right: 0;
   bottom: 0;
-  background-color: (0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   
 }
-.modal-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #5B084A;
-  padding-bottom: 10px;
-}
-.modal-header h2{
-  text-align: center;
-  flex-grow: 1;
-  margin: 0;
-  color: #5B084a;
-}
-.modal-body{
-  margin: 20px 0;
-  color: #333;
-}
+
+
 
 .modal-content{
   position: relative;
-  background-color: #FFF;
-  padding: 40px;
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, 1) 54%, hsla(336, 100%, 93%, 3) 98%);
+  padding: 90px 30px;
   border-radius: 8px;
   box-shadow:0 2px 20px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 350px;
   max-width: 70%;
   z-index: 1001;
+  color:#F48F8C;
  
 
 }
-.modal-button {
-  background-color: #5B084A;
+.modal-content h2{
+  text-transform: uppercase;
+  color: #F48F8C;
+}
+
+.modal-content button{
+  margin: 8px;
+}
+.post-now {
+  background-color: #F48F8C;
   color: white;
+
+}
+.post-now,
+.dont-post{
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   border: none;
-  padding: 10px 20px;
+  padding: 14px 25px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
 }
-.modal-button:hover{
-  background-color: #3e062c;
+.dont-post {
+  background: linear-gradient(360deg, hsla(349, 84%, 95%, 1) 30%, hsla(33, 73%, 94%, 1) 100%, hsla(288, 100%, 81%, 1) 100%);
+  color: #ED6F90;
+  font-weight: 400;
 }
-
-.close {
-  cursor: pointer;
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+ span.no-post-span{
+  word-wrap: break-word;
 }
 
-.close:hover,
-.close:focus{
-  color: #5B084A;
-  text-decoration: none;
-  cursor: pointer;
-}
+
+
+
+
+
+
+
 
 
 
