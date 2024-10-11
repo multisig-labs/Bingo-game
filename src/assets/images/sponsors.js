@@ -8,6 +8,7 @@ function Sponsors() {
       height="31"
       fill="none"
       viewBox="0 0 513 31"
+      className="sponsors"
     >
       <g fill="#fff" opacity="0.79">
         <g clipPath="url(#clip0_7_3255)">
