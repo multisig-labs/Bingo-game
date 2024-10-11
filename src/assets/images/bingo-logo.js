@@ -4,10 +4,11 @@ function BingoIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="387"
+      width="100%"
       height="118"
       fill="none"
       viewBox="0 0 487 118"
+      className="bingo-logo"
     >
       <g clipPath="url(#clip0_7_3387)">
         <path

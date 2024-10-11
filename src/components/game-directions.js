@@ -6,8 +6,7 @@ import '../index.css';
 //Images
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
-import Footer from '../assets/images/sponsors-img';
-import Sponsors from '../assets/images/sponsors-img';
+import Sponsors from '../assets/images/sponsors';
 
 
 const GameDirections = () => {

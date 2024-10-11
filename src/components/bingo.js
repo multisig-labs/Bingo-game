@@ -7,7 +7,7 @@ import BingoMessage from './bingo-message';
 
 
 //Images
-import Sponsors from '../assets/images/sponsors-img';
+import Sponsors from '../assets/images/sponsors';
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
 
@@ -172,7 +172,10 @@ const Bingo = () => {
       </div>
       {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
       {blackout && <p>Game Over! You have achieved Blackout!</p>}
+      <div className="reset-btn-container">
       <button className="reset-button" onClick={resetGame}>Start New Game</button>
+      </div>
+      <div className="line"></div>
       <Sponsors/>
 
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}

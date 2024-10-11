@@ -8,9 +8,10 @@
   margin: 0;
   padding: 0; 
   align-items: center;
-  margin: 0 auto;
- 
-  
+  background: linear-gradient(135deg, #411f56, #ea5d5d, #f0a1a1);
+  background-repeat: no-repeat;
+  height: 100%;
+
   
 }
 
@@ -19,11 +20,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #411f56, #ea5d5d, #f0a1a1);
-    
-    
-
+    height: 100%;
+  
     
     
   }
@@ -36,13 +34,15 @@
    
    }
    .login-header{
-    margin-top: 50px;
+    margin-top: 10px;
+    
    }
+  
    
    .line {
     width: 100%;
     height: 5.27px;
-    margin:20px 0;
+    margin:15px 0;
     position: relative;
     background-color: rgba(255, 255, 255, 0.8);
     mix-blend-mode: soft-light;
@@ -63,7 +63,6 @@
    .sponsors{
     width: 100%;
     max-width: 390px;
-    padding: 10px;
     text-align: center;
     font-size: 14px;
     color: #fff;
@@ -74,9 +73,11 @@
   .login-form{
     box-sizing: content-box;
     padding: 30px;
+    margin-bottom: 110px;
   }
   .directions{
     padding: 60px;
+    margin: 20px 20px 40px;
   }
 
   .login-form,
@@ -84,7 +85,6 @@
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.2);
-  margin: 20px 20px 40px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
@@ -218,20 +218,49 @@
 
 /* Bingo Card */
 
-.bingo{
-  position: relative;
+.intro {
+  margin-top: 20px;
+  display: flex;
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 430px;
+  height: 154px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 4px 10px;
+
+  
+}
+.intro h3 {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 0;
 
 }
 
 
+.bingo{
+  position: relative;
+  height: 100%;
+
+
+}
+
 .bingo-grid {
   display: grid;
-  grid-template-columns: repeat(3, 120px);
-  grid-template-rows: repeat(3, 120px);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr); 
   gap: 12px;
   padding: 20px;
-  max-width:400px;
   color: white;
+  width:100%;
+  max-width:445px;
+ 
 
 }
 
@@ -246,19 +275,22 @@
   cursor: pointer;
   font-size: 24px;
   transition: background-color 0.3s;
-  margin-bottom: 10px;
   font-size: 16px;
+  height: 142px;
+  width: 100%;
+  max-width: 142px;
+  
   
 }
 
 
 .bingo-tile.clicked{
-  background-color: #5B084A;
+  background-color: #f2be66;
 }
 
-
-.reset-button{
-  margin: 20px;
+.reset-btn-container{
+  display: flex;
+  margin-bottom: 30px;
 }
 
 
@@ -312,6 +344,7 @@
  
 
 }
+
 .post-now,
 .dont-post{
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
@@ -321,6 +354,7 @@
   font-size: 14px;
   align-items: center;
 }
+
 .dont-post {
   background: linear-gradient(360deg, hsla(349, 84%, 95%, 1) 30%, hsla(33, 73%, 94%, 1) 100%, hsla(288, 100%, 81%, 1) 100%);
   color: #BC0E3B;
