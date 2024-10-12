@@ -137,7 +137,7 @@ const Bingo = () => {
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
       <HeaderImg/>
-      <div className="line"></div>
+      <div className="line top-line"></div>
       <BingoIcon/>
       <div className="intro">
         <p>Network with people around you to find the folks in the square. To win, complete a three in a row horizontal, vertical, or diagonal.</p>

@@ -31,12 +31,12 @@ const LoginPage = () => {
   return(
     <div className="login-page container">
       <HeaderImg/>
-      <div className="line"></div>
+      <div className="line top-line"></div>
       <BingoIcon/>
       <h1 className="welcome">Welcome To Blocktail's Bingo Game</h1>
       
 
-      <form onSubmit={handleLogin} className="login-form">
+      <form onSubmit={handleLogin} className="login-form-container">
           <h2>Sign in to play</h2>
         <label htmlFor="wallet-address" className="twitter-handle-label">
           Wallet Address
@@ -67,7 +67,8 @@ const LoginPage = () => {
           Continue
         </button>
       </form> 
-    <div className="line"></div>
+      <div className="line bottom-line">
+    </div>
     <Sponsors/>
   </div>
   );

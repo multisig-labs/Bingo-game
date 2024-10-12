@@ -20,8 +20,7 @@ const GameDirections = () => {
   return(
     <div className="container ">
       <HeaderImg/>
-      <div className="line"></div>
-      <div className="directions-margin">
+      <div className="line top-line"></div>
         <BingoIcon/>
         <h1 className="welcome">Welcome to Blocktail's Bingo Game</h1>
         <div className="directions">
@@ -36,7 +35,6 @@ const GameDirections = () => {
             I understand, and I'm ready to play!
           </button>
         </div>
-      </div>
       <div className="line"></div>
       <Sponsors/>
     </div>

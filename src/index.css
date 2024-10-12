@@ -2,29 +2,48 @@
  *{
   font-family: 'Poppins', sans-serif;
   letter-spacing: 1px;
- }
+  box-sizing: border-box;
 
- html, body {
+ }
+ 
+
+ html,body {
   margin: 0;
   padding: 0; 
-  align-items: center;
   background: linear-gradient(135deg, #411f56, #ea5d5d, #f0a1a1);
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden; 
 
   
 }
 
   .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%; 
+  width: 100%;
+  padding: 20px; 
+  max-width: 390px;
+  position: relative
    
-    
   }
 
+  .login-header{
+   margin: 25px;
+  }
+
+  .bingo-logo{
+    padding:12px;
+    margin-top: 10px;
+  }
+  
    .welcome{
     margin-bottom: 30px;
     font-size: 16px;
@@ -32,11 +51,7 @@
     font-weight: 800;
    
    }
-   .login-header{
-    margin-top: 10px;
-    
-   }
-  
+   
    
    .line {
     width: 100%;
@@ -44,6 +59,9 @@
     position: relative;
     background-color: rgba(255, 255, 255, 0.8);
     mix-blend-mode: soft-light;
+    margin: 0;
+   
+
    }
 
 
@@ -58,28 +76,39 @@
     mix-blend-mode: soft-light;
 
    }
+  
    .sponsors{
     width: 100%;
     max-width: 390px;
     text-align: center;
     font-size: 14px;
     color: #fff;
+  
+
 
   }
+ 
   
   /* Login page */
+  .login-page{
+    display: flex;
+    flex-direction: column;
+ 
+
   
-  .login-form{
-    box-sizing: content-box;
+  }
+
+  .login-form-container{
     padding: 30px;
-    margin-bottom: 110px;
+    margin-bottom: 80px;
+ 
   }
   .directions{
     padding: 60px;
-    margin: 20px 20px 40px;
+   
   }
 
-  .login-form,
+  .login-form-container,
   .directions{
   display: flex;
   flex-direction: column;
@@ -94,19 +123,23 @@
   }
 
 
-  .login-form h2{
+  .login-form-container h2{
     font-size: 14.5px;
     color: #fff;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
     font-weight:600;
     text-transform: uppercase;
   }
 
-  .login-form p{
+  .login-form-container p{
+    width: 100%;
     font-size: 14px;
     color: #fff;
     font-weight:700;
     margin-bottom: 25px;
+    margin-top: 0;
+    justify-content: center;
+ 
   }
 
 
@@ -140,17 +173,18 @@
     transition: all 0.3s ease;
     box-sizing: border-box;
    
-  
    
   }
+  
   .twitter-handle-input::placeholder {
     color: rgba(255, 255, 255, 0.6);
     
   }
  
   .login-button {
-    width: 300px;
-    height: 76px;
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
     background-color: #df5454;
     color: #fff;
     border:none;
@@ -158,7 +192,6 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 20px;
     letter-spacing: 3px;
     text-transform: uppercase;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
@@ -168,9 +201,7 @@
   
 
 /* Game Directions */
-.directions-margin{
-  margin:40px;
-}
+
   .inner-directions{
     width: 385px;
     color: #fff;
@@ -275,7 +306,7 @@
   justify-content: center;
   align-items:center;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 16px;
   transition: background-color 0.3s;
   font-size: 16px;
   height: 142px;
@@ -367,7 +398,13 @@
 }
 
 
-
+@media (max-width: 355px) {
+  .welcome {
+    white-space: nowrap;
+    font-size: 14px;
+    
+  }
+}
 
 
 
