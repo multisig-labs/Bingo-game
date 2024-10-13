@@ -121,7 +121,6 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 376px;
   position: relative;
   text-align: center;
   align-items: center;
@@ -211,6 +210,7 @@
 .directions{
   padding: 22px 25px 40px;
   margin-bottom: 110px;
+  line-height: 17.64px;
   
 }
 
@@ -223,8 +223,10 @@
     text-align: center;
     margin-bottom: 20px;
     font-weight: 500;
+    
 
-
+    
+    
   }
   .inner-directions p{
     justify-content: center;
@@ -240,9 +242,12 @@
   }
  
   
-  .directions p:nth-of-type(2){
+  .dont-forget{
+    display: block;
+    font-weight: 700;
     margin-top: 20px;
     text-align: center;
+   
     
   }
   .accept-btn,
@@ -347,6 +352,31 @@
   background-color: #f2be66;
 }
 
+/*Bingo-message*/
+.bingo-message {
+  margin: 50px 10px;
+  padding-bottom: 20px;
+}
+
+.inner-bingo-content {
+  max-width: 396px;
+  width: 100%;
+  padding: 20px 60px;
+}
+.inner-bingo-content h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 30px;
+  color: #fff;
+}
+
+.inner-bingo-content p{
+  justify-content: center;
+  line-height: 24px;
+  color: #fff;
+  font-weight: 500;
+  
+} 
 
 
 /* Modals*/

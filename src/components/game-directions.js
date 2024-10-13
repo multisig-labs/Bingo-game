@@ -26,8 +26,8 @@ const GameDirections = () => {
         <div className="directions">
           <h3 className="how-to-win"> Here's how to win</h3>
         <div className="inner-directions">
-          <p>Go around the room to network with people. When you meet someone on the list, take a self with them for verfication proof. The first person to complete a row, column, or diagnol of squares of people will be in Bingo mode. Find Breevie immediately, show him the selfies, and claim your prize. Until all the criteria is met, the game will go on.</p>
-          <p><b>Don’t forget and good luck!</b></p>
+          <p>Go around the room to network with people. When you meet someone on the list, take a self with them for verfication proof. The first person to complete a row, column, or diagnol of squares of people will be in Bingo mode. Find Breevie immediately, show him the selfies, and claim your prize. Until all the criteria is met, the game will go on.
+          <span className="dont-forget">Don’t forget and good luck!</span></p>
         </div>
            
           
