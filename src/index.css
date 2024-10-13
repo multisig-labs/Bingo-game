@@ -114,7 +114,8 @@
   
   .login-form-container,
   .directions,
-  .bingo-message {
+  .bingo-message,
+  .winner-page {
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.2);
@@ -472,6 +473,40 @@
   font-weight: 400;
   white-space: normal;
   padding: 6px 15px;
+
+}
+/* Winner Page */
+.winner-page{
+  padding: 28px;
+  color: #fff;
+  margin-top: 40%;
+  margin-bottom: 60px;
+  justify-content: center;
+}
+.winner-page h1{
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.winner-page p{
+  font-weight: 700;
+  font-size: 32px;
+  margin-top: 4px;
+ 
+
+}
+
+.thanks-for-playing{
+  font-family: 'Poppins', sans-serif;
+  font-size: 15.4px;
+  font-weight: 800;
+  line-height: 19.87px;
+  letter-spacing: 0.19em;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 260px;
 
 }
 

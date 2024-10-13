@@ -159,7 +159,6 @@ const Bingo = () => {
   }, []);
 
   useEffect(() => {
-    // Only load saved data from localStorage if the game is not over
     if (!gameOver) {
       const savedBingoCard = localStorage.getItem("bingoCard");
       const savedClickedTiles = localStorage.getItem("clickedTiles");
