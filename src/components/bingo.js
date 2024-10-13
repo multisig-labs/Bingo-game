@@ -3,15 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css';
 import FreeModal from './free-modal';
 
-
-
-
-//Images
+// Images
 import Sponsors from '../assets/images/sponsors';
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
 import GameEnds from '../assets/images/game-ends';
-
 
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
@@ -43,8 +39,16 @@ const Bingo = () => {
     return savedClickedTiles ? JSON.parse(savedClickedTiles) : Array(3).fill(null).map(() => Array(3).fill(false));
   });
 
-  const [bingoCount, setBingoCount] = useState(0);
-  const [bingoTiles, setBingoTiles] = useState([]);
+  const [bingoCount, setBingoCount] = useState(() => {
+    const savedBingoCount = localStorage.getItem("bingoCount");
+    return savedBingoCount ? JSON.parse(savedBingoCount) : 0;
+  });
+
+  const [bingoTiles, setBingoTiles] = useState(() => {
+    const savedBingoTiles = localStorage.getItem("bingoTiles");
+    return savedBingoTiles ? JSON.parse(savedBingoTiles) : [];
+  });
+
   const [gameOver, setGameOver] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);  
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
@@ -64,11 +68,15 @@ const Bingo = () => {
     if (newBingoCount > bingoCount) {
       setBingoCount(newBingoCount);
       setBingoTiles(newBingoTiles);
-      
+
+      // Save game state in localStorage when a bingo is found
+      localStorage.setItem("clickedTiles", JSON.stringify(newClickedTiles));
+      localStorage.setItem("bingoCount", newBingoCount);
+      localStorage.setItem("bingoTiles", JSON.stringify(newBingoTiles));
+
       navigate('/bingo-message');
     }
 
-    // Check for blackout after each tile click
     const isCardFullyClicked = newClickedTiles.every(row => row.every(tile => tile === true));
 
     if (isCardFullyClicked) {
@@ -127,22 +135,51 @@ const Bingo = () => {
     setIsFreeModalOpen(false);
     setBlackout(false); // Reset blackout state
 
+    // Clear localStorage when resetting the game
     localStorage.removeItem("bingoCard");
     localStorage.removeItem("clickedTiles");
+    localStorage.removeItem("bingoCount");
+    localStorage.removeItem("bingoTiles");
   };
 
+  // Clear localStorage only when the user manually refreshes the page
   useEffect(() => {
-    resetGame();
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("bingoCard");
+      localStorage.removeItem("clickedTiles");
+      localStorage.removeItem("bingoCount");
+      localStorage.removeItem("bingoTiles");
+    };
 
-    localStorage.setItem("bingoCard", JSON.stringify(bingoCard));
-    localStorage.setItem("clickedTiles", JSON.stringify(clickedTiles));
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
+
+  useEffect(() => {
+    // Only load saved data from localStorage if the game is not over
+    if (!gameOver) {
+      const savedBingoCard = localStorage.getItem("bingoCard");
+      const savedClickedTiles = localStorage.getItem("clickedTiles");
+      const savedBingoCount = localStorage.getItem("bingoCount");
+      const savedBingoTiles = localStorage.getItem("bingoTiles");
+
+      if (savedBingoCard && savedClickedTiles && savedBingoCount && savedBingoTiles) {
+        setBingoCard(JSON.parse(savedBingoCard));
+        setClickedTiles(JSON.parse(savedClickedTiles));
+        setBingoCount(Number(savedBingoCount));
+        setBingoTiles(JSON.parse(savedBingoTiles));
+      }
+    }
+  }, [gameOver]);
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
-      <HeaderImg/>
+      <HeaderImg />
       <div className="line top-line"></div>
-      <BingoIcon/>
+      <BingoIcon />
       <div className="intro">
         <p>Network with people around you to find the folks in the square. To win, complete a three in a row horizontal, vertical, or diagonal.</p>
         <h3>Good Luck!</h3>
@@ -174,12 +211,12 @@ const Bingo = () => {
           })
         )}
       </div>
-      
+
       {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
       {blackout && <p>Game Over! You have achieved Blackout!</p>}
-      <GameEnds/>
+      <GameEnds />
       <div className="line"></div>
-      <Sponsors/>
+      <Sponsors />
 
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}
     </div>

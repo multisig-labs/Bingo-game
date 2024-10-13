@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Sponsors from '../assets/images/sponsors';
 
 const WinnerPage = () => {
-  // State to hold the winner's Twitter handle
   const [twitterHandle, setTwitterHandle] = useState('');
 
   useEffect(() => {
-    // Get the Twitter handle from localStorage
     const handle = localStorage.getItem('twitterHandle');
 
     if (handle) {
-      // If it's stored, update the state
       setTwitterHandle(handle);
     }
   }, []); 
@@ -23,7 +20,6 @@ const WinnerPage = () => {
       ) : (
         <p>You won, but we couldn't retrieve your Twitter handle.</p>
       )}
-      <button onClick={() => window.location.href = '/'}>Go Back to Home</button>
       <Sponsors/>
     </div>
   );
