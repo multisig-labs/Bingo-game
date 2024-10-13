@@ -36,8 +36,8 @@ return (
   <div className="modal-overlay" onClick={onClose}>
     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
       <h2>Free Square.</h2>
-      <p>Post a fun tweet on X and mention<span className="gogoPool-twitter"> @GoGoPool_</span></p>
-      <p>Be sure to show your tweet to Breevie if you get Bingo!</p>
+      <p>Post a fun tweet on X and<br/> mention<span className="gogoPool-twitter"> @GoGoPool_</span></p>
+      <p>Be sure to show your tweet<br/> to Breevie if you get Bingo!</p>
       
     <div className="btn-container">
       <button className="dont-post" onClick={onClose}>I Don't Want <br/> To Post</button>

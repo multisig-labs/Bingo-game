@@ -173,6 +173,7 @@ const Bingo = () => {
           })
         )}
       </div>
+      
       {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
       {blackout && <p>Game Over! You have achieved Blackout!</p>}
       
