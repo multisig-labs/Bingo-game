@@ -113,7 +113,8 @@
   }
   
   .login-form-container,
-  .directions{
+  .directions,
+  .bingo-message {
   display: flex;
   flex-direction: column;
   background: rgba(255, 255, 255, 0.2);
@@ -244,7 +245,8 @@
     text-align: center;
     
   }
-  .accept-btn {
+  .accept-btn,
+  .keep-playing-button {
     max-width: 350px;
     width: 100%;
     height: 76px;

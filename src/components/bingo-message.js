@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import './'
 
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
@@ -7,7 +8,7 @@ import Sponsors from '../assets/images/sponsors';
 
 const BingoMessage = () => {
   const navigate = useNavigate(); 
-  
+
   const handleBackToBingo = () => {
     navigate('/bingo'); 
   };
