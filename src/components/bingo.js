@@ -63,7 +63,8 @@ const Bingo = () => {
     if (newBingoCount > bingoCount) {
       setBingoCount(newBingoCount);
       setBingoTiles(newBingoTiles);
-      setIsModalOpen(true);  // Open BingoMessage modal when Bingo is hit
+      
+      navigate('/bingo-message');
     }
 
     // Check for blackout after each tile click
@@ -179,14 +180,6 @@ const Bingo = () => {
       <Sponsors/>
 
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}
-
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <BingoMessage close={() => setIsModalOpen(false)} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

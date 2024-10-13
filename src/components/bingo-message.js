@@ -1,26 +1,35 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
-const BingoMessage = ({close}) => {
-  const navigate = useNavigate();
+import HeaderImg from '../assets/images/header-img';
+import BingoIcon from '../assets/images/bingo-logo';
+import Sponsors from '../assets/images/sponsors';
 
-  const handleBackToBingo = () => {
-    close();
-    navigate('/bingo');
+const BingoMessage = () => {
+  const navigate = useNavigate(); 
   
-};
+  const handleBackToBingo = () => {
+    navigate('/bingo'); 
+  };
 
   return (
-    <div className="bingo-message">
-      <h2>GoGopool and Uplink present</h2>
-      <h1>Bingo Logo</h1>
-
-      <h3>Bingo!</h3>
-      <p>The game isn't over! Find Breevie now and 
-        show him your squares and selfies.</p>
-      <button className="keep-playing-button" onClick={handleBackToBingo}>
-        Oops, I was wrong. Keep playing.
-      </button>
+    <div className="container">
+      <HeaderImg />
+      <div className="line top-line"></div>
+      <BingoIcon />
+      <div className="bingo-message">
+        <h1>Bingo!</h1>
+        <p>
+          The game isn't over!<br />
+          Find Breevie now and show<br />
+          him your squares and selfies
+        </p>
+        <button className="keep-playing-button" onClick={handleBackToBingo}>
+          Oops, I was wrong. Keep playing.
+        </button>
+      </div>
+      <div className="line bottom-line"></div>
+      <Sponsors />
     </div>
   );
 };
