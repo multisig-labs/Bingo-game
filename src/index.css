@@ -209,7 +209,7 @@
 /* Game Directions */
 .directions{
   padding: 22px 25px 40px;
-  margin-bottom: 110px;
+  margin-bottom: 150px;
   line-height: 17.64px;
   
 }
@@ -407,12 +407,17 @@
   max-width: 385px;
   z-index: 1001;
   color:#BC0E3B;
+  line-height: 20.2px;
  
 
 }
 .modal-content h2{
   text-transform: uppercase;
   color: #c54b6b;
+}
+
+.modal-content .gogoPool-twitter{
+  font-weight: bold;
 }
 
 .btn-container{

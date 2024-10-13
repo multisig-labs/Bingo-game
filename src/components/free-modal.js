@@ -12,7 +12,7 @@ const FreeModal = ({ isOpen, onClose}) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h1 className="free-square">Free Square</h1>
-        <p>Post a fun tweet on X and mention @GoGoPool_.
+        <p>Post a fun tweet on X and mention <span className="gogoPool-twitter">@GoGoPool_</span>
           Be sure to show your tweet to Breevie if you get Bingo!
         </p>
         <div className="btn-container">
@@ -36,7 +36,7 @@ return (
   <div className="modal-overlay" onClick={onClose}>
     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
       <h2>Free Square.</h2>
-      <p>Post a fun tweet on X and mention @GoGoPool_</p>
+      <p>Post a fun tweet on X and mention<span className="gogoPool-twitter"> @GoGoPool_</span></p>
       <p>Be sure to show your tweet to Breevie if you get Bingo!</p>
       
     <div className="btn-container">
