@@ -8,6 +8,7 @@ function Star6() {
       height="16"
       fill="none"
       viewBox="0 0 16 16"
+      className="star6 star"
     >
       <path
         fill="#E43B49"

@@ -4,10 +4,11 @@ function Star3() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="49"
-      height="49"
+      width="58"
+      height="58"
       fill="none"
       viewBox="0 0 49 49"
+      className="star3 star"
     >
       <path
         fill="#FFC596"
