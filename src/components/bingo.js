@@ -130,9 +130,11 @@ const Bingo = () => {
   };
 
   useEffect(() => {
+    resetGame();
+
     localStorage.setItem("bingoCard", JSON.stringify(bingoCard));
     localStorage.setItem("clickedTiles", JSON.stringify(clickedTiles));
-  }, [bingoCard, clickedTiles]);
+  }, []);
 
   return (
     <div className={`bingo container ${isModalOpen || isFreeModalOpen ? 'blur' : ''}`}>
@@ -172,9 +174,7 @@ const Bingo = () => {
       </div>
       {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
       {blackout && <p>Game Over! You have achieved Blackout!</p>}
-      <div className="reset-btn-container">
-      <button className="reset-button" onClick={resetGame}>Start New Game</button>
-      </div>
+      
       <div className="line"></div>
       <Sponsors/>
 
