@@ -22,13 +22,14 @@ const BingoMessage = () => {
         <div className="inner-bingo-content">
             <h1>Bingo!</h1>
             <p>
-              The game isn't over!<br />
-              Find Breevie now and show<br />
-              him your squares and selfies
+              The game isn't over!
+              Find Breevie now and show
+              him your squares and selfies.
             </p>
           </div>
         <button className="keep-playing-button" onClick={handleBackToBingo}>
-          Oops, I was wrong. Keep playing.
+          Oops, I forgot to take selfies.<br/>
+          Keep playing.
         </button>
       </div>
       <div className="line bottom-line"></div>

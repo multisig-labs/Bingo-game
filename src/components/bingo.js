@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 import FreeModal from './free-modal';
-import BingoMessage from './bingo-message';
+
 
 
 
@@ -10,6 +10,7 @@ import BingoMessage from './bingo-message';
 import Sponsors from '../assets/images/sponsors';
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
+import GameEnds from '../assets/images/game-ends';
 
 
 const generateBingoCard = () => {
@@ -176,7 +177,7 @@ const Bingo = () => {
       
       {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
       {blackout && <p>Game Over! You have achieved Blackout!</p>}
-      
+      <GameEnds/>
       <div className="line"></div>
       <Sponsors/>
 

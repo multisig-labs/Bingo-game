@@ -121,6 +121,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 100%;
+  max-width: 476px;
   position: relative;
   text-align: center;
   align-items: center;
@@ -230,6 +231,7 @@
   }
   .inner-directions p{
     justify-content: center;
+    font-size:12.97px;
   }
 
   .how-to-win{
@@ -262,6 +264,7 @@
     transition: all 0.3s ease; 
     color: #DB2549;
     font-weight: 600;
+    line-height: 1.3;
   }
 
   .accept-btn:hover{
@@ -286,7 +289,6 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 10px 12px;
-  max-width:490px;
   width:100%;
 
   
@@ -319,17 +321,13 @@
   width: 100%;
   max-width: 414px;
   margin: 0 auto;
-  height: 480px;
   justify-content: center;
   align-items: center;
  
 
 }
-.game-time-ends {
-  color: #F9E8E1;
-  text-transform: bold;
-
-
+.game-ends{
+  margin: 15px;
 }
 
 
@@ -360,27 +358,44 @@
 
 /*Bingo-message*/
 .bingo-message {
-  margin: 50px 10px;
-  padding-bottom: 20px;
+  width: 100%;
+  max-width: 476px;
+  height: auto;
+  font-family: 'Poppins', sans-serif;
+  font-size: 21.89px; 
+  font-weight: 500; 
+  line-height: 29.76px;
+  letter-spacing: 0.1em;
+  text-align: center; 
+  color: #fff; 
+  padding: 30px 20px; 
+  margin: 40px 90px 280px; 
+  border-radius: 10px; 
+  box-sizing: border-box;
 }
 
 .inner-bingo-content {
   max-width: 396px;
   width: 100%;
-  padding: 20px 60px;
+  line-height: 24.76px;
+  box-sizing: border-box;
+  padding: 10px;
+
 }
+
 .inner-bingo-content h1 {
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   font-weight: 700;
   font-size: 30px;
   color: #fff;
 }
 
 .inner-bingo-content p{
+  width: 100%;
   justify-content: center;
-  line-height: 24px;
   color: #fff;
   font-weight: 500;
+  margin-bottom: 40px;
   
 } 
 

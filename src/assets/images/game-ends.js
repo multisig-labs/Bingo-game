@@ -4,10 +4,11 @@ function GameEnds() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="233"
+      width="200"
       height="58"
       fill="none"
       viewBox="0 0 233 58"
+      className="game-ends"
     >
       <path
         fill="#F9E8E1"
