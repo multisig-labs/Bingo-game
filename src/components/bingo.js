@@ -23,7 +23,7 @@ const names = [
   { firstName: "Alejo", lastName: "Miguez", company: "Uplink", position: "Argentina Rep" },
   { firstName: "Damaris Valero", lastName: "Scarpa", company: "Uplink", position: "Chief Revenue Officer" },
   { firstName: "Aldrin", lastName: "D'Souza", company: "Uplink", position: "VP of Product" },
-  { firstName: "Free", lastName: "", company: "", position: "" },
+  { firstName: "Take a picture at the Photo Booth", lastName: "", company: "", position: "" },
   { firstName: "Breevie", lastName: "", company: "GoGoPool", position: "Head of Growth" },
   { firstName: "Budd", lastName: "White", company: "GoGoPool", position: "Head of Product" },
   { firstName: "Riad", lastName: "Wahby", company: "Cubist", position: "Co-Founder & CEO" },
