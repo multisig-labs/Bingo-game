@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
@@ -10,24 +7,23 @@ import FreeModal from './free-modal';
 import Sponsors from '../assets/images/sponsors';
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
-import GameEnds from '../assets/images/game-ends';
 
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
-  card[1][1] = "Free"; 
+  card[1][1] = "Free"; // Set the center tile to "Free"
   return card;
 };
 
 const names = [
-  { firstName: "Juan Manuel", lastName: "Salgado", company: "Uplink", position: "Argentina Rep" },
-  { firstName: "Alejo", lastName: "Miguez", company: "Uplink", position: "Argentina Rep" },
-  { firstName: "Damaris Valero", lastName: "Scarpa", company: "Uplink", position: "Chief Revenue Officer" },
-  { firstName: "Aldrin", lastName: "D'Souza", company: "Uplink", position: "VP of Product" },
+  { firstName: "Juan", lastName: " Manuel Salgado", position: "Argentina Rep", company: "Uplink " },
+  { firstName: "Alejo", lastName: " Miguez", company: "Uplink ", position: "Argentina Rep" },
+  { firstName: "Damaris Valero", lastName: " Scarpa", company: "Uplink ", position: "Chief Revenue Officer", special: true }, // Add special property
+  { firstName: "Aldrin", lastName: " D' Souza", company: "Uplink ", position: "VP of Product" },
   { firstName: "Take a picture at the Photo Booth", lastName: "", company: "", position: "" },
-  { firstName: "Breevie", lastName: "", company: "GoGoPool", position: "Head of Growth" },
-  { firstName: "Budd", lastName: "White", company: "GoGoPool", position: "Head of Product" },
-  { firstName: "Riad", lastName: "Wahby", company: "Cubist", position: "Co-Founder & CEO" },
-  { firstName: "Carlos", lastName: "Lei", company: "", position: "CEO & Founder" }
+  { firstName: "Breevie ", lastName: "", company: "GoGoPool ", position: "Head of Growth" },
+  { firstName: "Budd", lastName: " White", company: "GoGoPool ", position: "Head of Product" },
+  { firstName: "Riad", lastName: " Wahby", company: "Cubist ", position: "Co-Founder & CEO" },
+  { firstName: "Carlos", lastName: " Lei", company: "", position: "CEO & Founder" }
 ];
 
 const Bingo = () => {
@@ -53,9 +49,9 @@ const Bingo = () => {
   });
 
   const [gameOver, setGameOver] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
-  const [blackout, setBlackout] = useState(false); 
+  const [blackout, setBlackout] = useState(false);
 
   const handleTileClick = (rowIndex, colIndex) => {
     if (clickedTiles[rowIndex][colIndex] || gameOver) return;
@@ -85,7 +81,7 @@ const Bingo = () => {
     if (isCardFullyClicked) {
       setBlackout(true); // Set blackout state to true
       setGameOver(true); // Mark game as over
-      navigate('/winner');  // Redirect to the winner page when blackout occurs
+      navigate('/winner'); // Redirect to the winner page when blackout occurs
     } else {
       setBlackout(false); // Reset blackout state if it's not a blackout
     }
@@ -189,22 +185,32 @@ const Bingo = () => {
       <div className="bingo-grid">
         {bingoCard.map((row, rowIndex) =>
           row.map((_, colIndex) => {
-            const { firstName, lastName, company, position } = names[rowIndex * 3 + colIndex];
+            const { firstName, lastName, company, position, special } = names[rowIndex * 3 + colIndex];
+            const isFreeTile = rowIndex === 1 && colIndex === 1; // Check if it's the Free tile
+            const tileClass = special ? 'special-tile' : '';
+            const freeTileClass = isFreeTile ? 'free-tile' : ''; // Add class if it's the Free tile
+
             return (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                className={`bingo-tile ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''}`}
+                className={`bingo-tile ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''} ${tileClass} ${freeTileClass}`}
                 onClick={() => handleTileClick(rowIndex, colIndex)}
               >
-                <div>
+                <div className="bingo-tile-content">
                   {clickedTiles[rowIndex][colIndex] ? (
                     ''
                   ) : (
                     <>
-                      <div>{firstName}</div>
-                      {lastName && <div>{lastName}</div>}
-                      <div>{company}</div>
-                      {position && <div>{position}</div>}
+                      <div className="name">
+                        <span className="first-name">{firstName}</span>
+                        {lastName && <span className="last-name">{lastName}</span>}
+                      </div>
+                      <div className="position">
+                        {position && <span>{position}</span>}
+                      </div>
+                      <div className="company">
+                        {company && <span>{company}</span>}
+                      </div>
                     </>
                   )}
                 </div>
@@ -213,14 +219,8 @@ const Bingo = () => {
           })
         )}
       </div>
-
-      {gameOver && !blackout && <p>Game Over! You completed a Bingo card.</p>}
-      {blackout && <p>Game Over! You have achieved Blackout!</p>}
-      <GameEnds />
-      <div className="line"></div>
-      <Sponsors />
-
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}
+      {blackout && <div className="blackout-overlay"></div>}
     </div>
   );
 };

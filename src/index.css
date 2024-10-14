@@ -320,11 +320,11 @@
  
 
 }
-
+/* CSS for Bingo grid and tiles */
 .bingo-grid {
   display: grid;
   grid-template-columns: repeat(3, 129px);
-  grid-template-rows: repeat(3, 129px); 
+  grid-template-rows: repeat(3, 129px);
   gap: 10px;
   padding: 30px 30px 0px 30px;
   color: white;
@@ -333,38 +333,61 @@
   margin: 0 auto;
   justify-content: center;
   align-items: center;
- 
-
 }
-.game-ends{
-  margin: 15px;
-}
-
-
+/* General tile styles */
 .bingo-tile {
   display: flex;
   flex-direction: column;
-  background-color:#EACCE4;
+  background-color: #EACCE4;
   border: 1px solid transparent;
   border-radius: 4px;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
-  font-size: 16px;
   height: 129px;
   width: 100%;
-  max-width: 129px
-
-  
-  
+  max-width: 129px;
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
 }
 
-
-.bingo-tile.clicked{
+.bingo-tile.clicked {
   background-color: #f2be66;
 }
+
+
+.bingo-tile-content,
+.bingo-tile.free-tile .bingo-tile-content{
+  position: absolute;
+  bottom: 5px;
+  left: 3px;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  color: #fff;
+  font-family: "Poppins", "sans-serif";
+}
+
+/* Styling for the Free tile */
+.bingo-tile.free-tile .bingo-tile-content {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  height: 100%;
+  position: relative; 
+  bottom: 0;
+}
+
+.bingo-tile.free-tile .bingo-tile-content .name {
+  font-weight: bold;
+  text-align: center;
+}
+
+
 
 /*Bingo-message*/
 .bingo-message {
