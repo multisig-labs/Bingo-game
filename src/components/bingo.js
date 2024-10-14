@@ -79,11 +79,11 @@ const Bingo = () => {
     const isCardFullyClicked = newClickedTiles.every(row => row.every(tile => tile === true));
 
     if (isCardFullyClicked) {
-      setBlackout(true); // Set blackout state to true
-      setGameOver(true); // Mark game as over
-      navigate('/winner'); // Redirect to the winner page when blackout occurs
+      setBlackout(true); 
+      setGameOver(true); 
+      navigate('/winner'); 
     } else {
-      setBlackout(false); // Reset blackout state if it's not a blackout
+      setBlackout(false); 
     }
 
     if (rowIndex === 1 && colIndex === 1) {
