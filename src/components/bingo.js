@@ -219,6 +219,9 @@ const Bingo = () => {
           })
         )}
       </div>
+      
+      <div className="line"></div>
+      <Sponsors/>
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}
       {blackout && <div className="blackout-overlay"></div>}
     </div>
