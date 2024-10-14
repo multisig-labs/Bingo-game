@@ -19,15 +19,15 @@ const generateBingoCard = () => {
 };
 
 const names = [
-  { firstName: "Alice", lastName: "Smith", company: "Company A", position: "Manager" },
-  { firstName: "Becky", lastName: "", company: "Company B", position: "Developer" },
-  { firstName: "Charlie", lastName: "Brown", company: "Company C", position: "Designer" },
-  { firstName: "David", lastName: "Johnson", company: "Company D", position: "Analyst" },
+  { firstName: "Juan Manuel", lastName: "Salgado", company: "Uplink", position: "Argentina Rep" },
+  { firstName: "Alejo", lastName: "Miguez", company: "Uplink", position: "Argentina Rep" },
+  { firstName: "Damaris Valero", lastName: "Scarpa", company: "Uplink", position: "Chief Revenue Officer" },
+  { firstName: "Aldrin", lastName: "D'Souza", company: "Uplink", position: "VP of Product" },
   { firstName: "Free", lastName: "", company: "", position: "" },
-  { firstName: "Frank", lastName: "Miller", company: "Company E", position: "Tester" },
-  { firstName: "George", lastName: "Davis", company: "Company F", position: "HR" },
-  { firstName: "Hannah", lastName: "Garcia", company: "Company G", position: "Sales" },
-  { firstName: "Ivan", lastName: "Martinez", company: "Company H", position: "Support" }
+  { firstName: "Breevie", lastName: "", company: "GoGoPool", position: "Head of Growth" },
+  { firstName: "Budd", lastName: "White", company: "GoGoPool", position: "Head of Product" },
+  { firstName: "Riad", lastName: "Wahby", company: "Cubist", position: "Co-Founder & CEO" },
+  { firstName: "Carlos", lastName: "Lei", company: "", position: "CEO & Founder" }
 ];
 
 const Bingo = () => {
