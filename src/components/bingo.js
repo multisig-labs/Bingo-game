@@ -17,7 +17,7 @@ const generateBingoCard = () => {
 const names = [
   { firstName: "Juan", lastName: " Manuel Salgado", position: "Argentina Rep", company: "Uplink " },
   { firstName: "Alejo", lastName: " Miguez", company: "Uplink ", position: "Argentina Rep" },
-  { firstName: "Damaris Valero", lastName: " Scarpa", company: "Uplink ", position: "Chief Revenue Officer", special: true }, // Add special property
+  { firstName: "Damaris Valero", lastName: " Scarpa", company: "Uplink ", position: "Chief Revenue Officer" },
   { firstName: "Aldrin", lastName: " D' Souza", company: "Uplink ", position: "VP of Product" },
   { firstName: "Take a picture at the Photo Booth", lastName: "", company: "", position: "" },
   { firstName: "Breevie ", lastName: "", company: "GoGoPool ", position: "Head of Growth" },
@@ -79,11 +79,11 @@ const Bingo = () => {
     const isCardFullyClicked = newClickedTiles.every(row => row.every(tile => tile === true));
 
     if (isCardFullyClicked) {
-      setBlackout(true); 
-      setGameOver(true); 
-      navigate('/winner'); 
+      setBlackout(true);
+      setGameOver(true);
+      navigate('/winner');
     } else {
-      setBlackout(false); 
+      setBlackout(false);
     }
 
     if (rowIndex === 1 && colIndex === 1) {
@@ -219,9 +219,9 @@ const Bingo = () => {
           })
         )}
       </div>
-      
+
       <div className="line"></div>
-      <Sponsors/>
+      <Sponsors />
       {isFreeModalOpen && <FreeModal isOpen={isFreeModalOpen} onClose={() => setIsFreeModalOpen(false)} />}
       {blackout && <div className="blackout-overlay"></div>}
     </div>

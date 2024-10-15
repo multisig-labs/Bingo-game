@@ -1,76 +1,94 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
 import Sponsors from '../assets/images/sponsors';
-
-
+import { SupabaseContext } from '../SupabaseContext';
 
 const LoginPage = () => {
   const [twitterHandle, setTwitterHandle] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const navigate = useNavigate();
+  const { supabaseClient } = useContext(SupabaseContext);
 
-  const handleInputChange = (e) => {
-    setTwitterHandle(e.target.value);
-  };
 
-  const handleLogin = (e) => {
+  // useEffect(() => {
+  //   const twitter = localStorage.getItem("twitterHandle")
+  //   const tg = localStorage.getItem("telegram")
+
+  //   if (twitter && tg) {
+  //     navigate('/bingo')
+  //   }
+  // }, [navigate])
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (twitterHandle) {
+    if (twitterHandle && telegram) {
       localStorage.setItem('twitterHandle', twitterHandle);
-    
+      localStorage.setItem('telegram', telegram);
 
-    navigate('./game-directions');
-  }else{
-    alert('Please enter your Twitter handle');
-  }
-};
+      const { error } = await supabaseClient
+        .from("bingo_players")
+        .insert({
+          telegram: telegram,
+          twitter: twitterHandle
+        }).select().single()
 
-  return(
+      if (error) {
+        console.error("Problem inserting into supabase: ", error);
+      }
+
+      navigate('/game-directions');
+    }
+  };
+
+  return (
     <div className="login-page container">
-      <HeaderImg/>
+      <HeaderImg />
       <div className="line top-line"></div>
-      <BingoIcon/>
+      <BingoIcon />
       <h1 className="welcome">Welcome To Blocktail's Bingo Game</h1>
-      
+
 
       <form onSubmit={handleLogin} className="login-form-container">
-          <h2>Sign in to play</h2>
-        <label htmlFor="wallet-address" className="twitter-handle-label">
-          Wallet Address
+        <h2>Sign in to play</h2>
+        <label htmlFor="telegram" className="login-label">
+          Telegram
         </label>
         <input
           type="text"
-          id="wallet-address"
-          name="wallet-address"
-          placeholder="0x329sdfadsghbngvdgb"
-          className="twitter-handle-input"
-          />
+          name="telegram"
+          placeholder="@ggp_steven"
+          className="login-input"
+          onChange={(e) => setTelegram(e.target.value)}
+        />
 
-        <label htmlFor="twitter-handle" className="twitter-handle-label">
+        <label htmlFor="twitter-handle" className="login-label">
           Twitter Handle
         </label>
         <input
           type="text"
-          id="twitter-handle2"
           name="twitterHandle"
-          placeholder="@twitter_handle"
-          className="twitter-handle-input"
+          placeholder="@gogopool_"
+          className="login-input"
           value={twitterHandle}
-          onChange={handleInputChange}
-          />
-          
+          onChange={(e) => setTwitterHandle(e.target.value)}
+        />
+
         <p>All of your information is kept private and we will not share it with anyone.</p>
-        <button type="submit" className="login-button">
+        <button disabled={!twitterHandle && !telegram} type="submit" className="login-button">
           Continue
         </button>
-      </form> 
+
+      </form>
       <div className="line bottom-line">
+      </div>
+      <Sponsors />
     </div>
-    <Sponsors/>
-  </div>
   );
 };
 
