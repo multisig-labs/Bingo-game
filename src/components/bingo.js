@@ -7,6 +7,8 @@ import FreeModal from './free-modal';
 import Sponsors from '../assets/images/sponsors';
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
+import balloonRed from '../assets/images/balloon-red.svg';
+import balloonPurple from '../assets/images/balloon-purple.svg';
 
 const generateBingoCard = () => {
   const card = Array.from({ length: 3 }, () => Array(3).fill(null));
@@ -23,7 +25,7 @@ const names = [
   { firstName: "Breevie ", lastName: "", company: "GoGoPool ", position: "Head of Growth" },
   { firstName: "Budd", lastName: " White", company: "GoGoPool ", position: "Head of Product" },
   { firstName: "Riad", lastName: " Wahby", company: "Cubist ", position: "Co-Founder & CEO" },
-  { firstName: "Carlos", lastName: " Lei", company: "", position: "CEO & Founder" }
+  { firstName: "Will", lastName: " Dos Santos", company: "GoGoPool", position: "Creative Director" }
 ];
 
 const Bingo = () => {
@@ -180,9 +182,9 @@ const Bingo = () => {
       <BingoIcon />
       <div className="intro">
         <p>Network with people around you to find the folks in the square. To win, complete a three in a row horizontal, vertical, or diagonal.</p>
-        <h3>Good Luck!</h3>
+        <h3 className='uppercase'>Good Luck!</h3>
       </div>
-      <div className="bingo-grid">
+      <div className="bingo-grid ">
         {bingoCard.map((row, rowIndex) =>
           row.map((_, colIndex) => {
             const { firstName, lastName, company, position, special } = names[rowIndex * 3 + colIndex];
@@ -196,9 +198,25 @@ const Bingo = () => {
                 className={`bingo-tile ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''} ${tileClass} ${freeTileClass}`}
                 onClick={() => handleTileClick(rowIndex, colIndex)}
               >
-                <div className="bingo-tile-content">
+                <img
+                  src={`${clickedTiles[rowIndex][colIndex] ? balloonPurple : balloonRed}`}
+                  alt="balloon"
+                  style={{ position: 'absolute', top: '5px', right: '5px' }}
+                />                
+                <div className={`bingo-tile-content ${clickedTiles[rowIndex][colIndex] ? 'clicked' : ''}`}>
                   {clickedTiles[rowIndex][colIndex] ? (
-                    ''
+                    <>
+                    <div className="name">
+                      <span className="first-name">{firstName}</span>
+                      {lastName && <span className="last-name">{lastName}</span>}
+                    </div>
+                    <div className="position">
+                      {position && <span>{position}</span>}
+                    </div>
+                    <div className="company">
+                      {company && <span>{company}</span>}
+                    </div>
+                  </>
                   ) : (
                     <>
                       <div className="name">
