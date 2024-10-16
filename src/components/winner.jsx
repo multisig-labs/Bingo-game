@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from 'react';
-
-
 //Images
 import HeaderImg from '../assets/images/header-img';
 import BingoIcon from '../assets/images/bingo-logo';
@@ -13,15 +10,8 @@ import Star6 from '../assets/images/star-6';
 import StarBox from '../assets/images/star-box';
 
 const WinnerPage = () => {
-  const [twitterHandle, setTwitterHandle] = useState('');
-
-  useEffect(() => {
-    const handle = localStorage.getItem('twitterHandle');
-
-    if (handle) {
-      setTwitterHandle(handle);
-    }
-  }, []);
+  const twitter = localStorage.getItem('twitterHandle');
+  const tg = localStorage.getItem('telegram');
 
   return (
     <div className="container">
@@ -36,13 +26,13 @@ const WinnerPage = () => {
       <Star6 />
       <StarBox />
       <div className="winner-page">
-        {twitterHandle ? (
+        {twitter || tg ? (
           <>
             <h1>Congratulations Winner!</h1>
-            <span>{twitterHandle}</span>
+            <span>{twitter ? twitter : tg}</span>
           </>
         ) : (
-          <p className='no-twitter'>You won, but we couldn't retrieve your Twitter handle.</p>
+          <p className='no-twitter'>You won, but we couldn't retrieve your socials.</p>
         )}
       </div>
       <p className="thanks-for-playing">Thanks for playing!</p>

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { generateBingoCard } from "./components/bingoUtils";
+import { generateBingoCard } from "./utils/bingoUtils";
 
 export const BingoContext = createContext();
 

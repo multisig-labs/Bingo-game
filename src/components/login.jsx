@@ -25,7 +25,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (twitterHandle && telegram) {
+    if (twitterHandle || telegram) {
       localStorage.setItem('twitterHandle', twitterHandle);
       localStorage.setItem('telegram', telegram);
 

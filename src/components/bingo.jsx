@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import "../index.css";
 import FreeModal from "./free-modal";
-import { names } from "./bingoUtils";
+import { names } from "../utils/bingoUtils";
 import { BingoContext } from "../BingoContext";
 
 import Sponsors from "../assets/images/sponsors";
@@ -20,7 +20,6 @@ const Bingo = () => {
 
   const twitterHandle = localStorage.getItem("twitterHandle")
   const telegram = localStorage.getItem("telegram")
-
   useEffect(() => {
     // navigate to login if they land on this page without putting in twitterHandle or telegram
     if (!twitterHandle && !telegram) {
@@ -76,7 +75,7 @@ const Bingo = () => {
         </div>
         <p>
           Network with people around you to find the folks in the square. To
-          win, complete a three in a row horizontal, vertical, or diagonal.
+          win, complete a full card bingo -- all 9 squares --
         </p>
         <h3 className="uppercase">Good Luck!</h3>
       </div>
