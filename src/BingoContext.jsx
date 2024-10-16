@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { generateBingoCard } from "./components/bingoUtils";
+import { generateBingoCard } from "./utils/bingoUtils";
 
 export const BingoContext = createContext();
 
@@ -13,8 +13,12 @@ const defaultGame = {
 export const BingoProvider = ({ children }) => {
   const [gameState, setGameState] = useState(defaultGame);
 
+  function resetGame() {
+    setGameState(defaultGame)
+  }
+
   return (
-    <BingoContext.Provider value={{ gameState, setGameState }}>
+    <BingoContext.Provider value={{ gameState, setGameState, resetGame }}>
       {children}
     </BingoContext.Provider>
   );

@@ -29,13 +29,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
   width: 100%;
   max-width: 476px;
   position: relative;
   padding: 0 20px 0px;
-
-
 }
 
 .header-img,
@@ -113,9 +110,23 @@ body {
 .login-form-container {
   padding: 19px 25px 45px;
   margin-bottom: 120px;
+}
 
+.back-box {
+  font-style: oblique;
+  display: flex;
+  width: 100%;
+  justify-content: start;
+}
 
+.arrow-back {
+  width: 20px;
+  height: 20px;
+  filter: invert(100%);
+}
 
+.flex {
+  display: flex;
 }
 
 .login-form-container,
@@ -234,60 +245,58 @@ body {
   padding: 22px 25px 40px;
   margin-bottom: 150px;
   line-height: 17.64px;
-
 }
 
 .inner-directions {
   width: 100%;
   padding: 5px;
+  max-width: 356px;
   color: #fff;
   border-radius: 8px;
-  letter-spacing: 1px;
-  text-align: center;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: justify;
   margin-bottom: 20px;
-  font-weight: 500;
-
-
-  .how-to-win {
-    color: #fff;
-    margin-top: 28px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-
-  .dont-forget {
-    display: block;
-    font-weight: 700;
-    margin-top: 20px;
-    text-align: center;
-
-
-  }
-
-  .accept-btn,
-  .keep-playing-button {
-    max-width: 350px;
-    width: 100%;
-    height: 76px;
-    border-radius: 8.92px;
-    background: linear-gradient(360deg, hsla(349, 84%, 95%, 1) 30%, hsla(33, 73%, 94%, 1) 100%, hsla(288, 100%, 81%, 1) 100%);
-    border: none;
-    box-shadow: 0px 6px 12px rgba(226, 82, 110, 0.9);
-    transition: all 0.3s ease;
-    color: #DB2549;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-
-
 }
 
-.inner-directions p {
-  justify-content: center;
-  font-size: 12.97px;
+.no-twitter {
+  font-size: 18px;
+  z-index: 10;
+}
+
+.how-to-win {
+  color: #fff;
+  margin-top: 28px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+.good-luck {
+  display: block;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.accept-btn,
+.keep-playing-button {
+  max-width: 350px;
+  width: 100%;
+  height: 76px;
+  border-radius: 8.92px;
+  font-size: 18px;
+  background: linear-gradient(360deg, hsla(349, 84%, 95%, 1) 30%, hsla(33, 73%, 94%, 1) 100%, hsla(288, 100%, 81%, 1) 100%);
+  border: none;
+  box-shadow: 0px 6px 12px rgba(226, 82, 110, 0.9);
+  transition: all 0.3s ease;
+  color: #DB2549;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 30px;
 }
 
 .how-to-win {
@@ -349,8 +358,6 @@ body {
   max-width: 419px;
   width: 100%;
   font-size: 14px;
-
-
 }
 
 .intro h3 {
@@ -358,7 +365,6 @@ body {
   font-size: 20px;
   margin-top: 0;
   margin-bottom: 0;
-
 }
 
 .intro p {
@@ -370,8 +376,6 @@ body {
 .bingo {
   position: relative;
   padding: 15px 20px;
-
-
 }
 
 .bingo-grid {
@@ -396,10 +400,8 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid transparent;
   border-radius: 10px;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   transition: background-color 0.3s;
   width: 125px;
   height: 125px;
@@ -417,15 +419,19 @@ body {
 
 
 .bingo-tile .bingo-tile-content {
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   bottom: 5px;
   left: 3px;
   width: 100%;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
   color: #fff;
   font-family: "Poppins", "sans-serif";
   text-transform: uppercase;
+  line-height: 16px;
 }
 
 .bingo-tile-content.clicked {
@@ -446,15 +452,14 @@ body {
 
 .bingo-tile.free-tile .bingo-tile-content,
 .name {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 500;
+  max-width: 85px;
 }
 
 .uppercase {
   text-transform: uppercase;
 }
-
-
 
 /*Bingo-message*/
 .bingo-message {
@@ -496,9 +501,51 @@ body {
   color: #fff;
   font-weight: 500;
   margin-bottom: 40px;
-
 }
 
+.company {
+  font-size: 11px;
+}
+
+.emphasis {
+  color: purple;
+  font-style: italic;
+}
+
+.confirm {
+  display: flex;
+  margin-bottom: 16px;
+  color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  max-width: 419px;
+  width: 100%;
+  font-size: 18px;
+}
+
+.confirm-button {
+  max-width: 300px;
+  margin-top: 12px;
+  padding: 10px;
+  height: 45px;
+  background-color: #5F5DDC;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s ease;
+}
 
 /* Modals*/
 
@@ -584,8 +631,8 @@ body {
   margin-bottom: 30%;
   padding: 28px 35px;
   color: #fff;
-
-
+  font-size: 32px;
+  font-weight: 700;
 }
 
 .star {
@@ -642,14 +689,6 @@ body {
   font-weight: 400;
   margin-bottom: 0;
   padding-bottom: 0;
-}
-
-.winner-page p {
-  font-weight: 700;
-  font-size: 32px;
-  margin-top: 4px;
-
-
 }
 
 .thanks-for-playing {
