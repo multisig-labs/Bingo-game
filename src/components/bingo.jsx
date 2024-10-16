@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import "../index.css";
 import FreeModal from "./free-modal";
-import { findBingos, names } from "./bingoUtils";
+import { names } from "./bingoUtils";
 import { BingoContext } from "../BingoContext";
 
 import Sponsors from "../assets/images/sponsors";
@@ -10,43 +9,43 @@ import HeaderImg from "../assets/images/header-img";
 import BingoIcon from "../assets/images/bingo-logo";
 import balloonRed from "../assets/images/balloon-red.svg";
 import balloonPurple from "../assets/images/balloon-purple.svg";
-import {useSupabase} from '../hooks/useSupabase'
+import { useNavigate } from "react-router-dom";
 
 const Bingo = () => {
-  const navigate = useNavigate();
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
+  const [confirmCard, setConfirmCard] = useState(false);
+
   const { gameState, setGameState } = useContext(BingoContext);
-  const twitterHandle = localStorage.getItem("twitterHandle");
-console.log({twitterHandle})
-  const {data: userInfo } = useSupabase({twitterHandle})
-console.log({userInfo}, userInfo.data.twitter, userInfo.data)
+  const navigate = useNavigate();
+
+  const twitterHandle = localStorage.getItem("twitterHandle")
+  const telegram = localStorage.getItem("telegram")
+
+  useEffect(() => {
+    // navigate to login if they land on this page without putting in twitterHandle or telegram
+    if (!twitterHandle && !telegram) {
+      navigate("/")
+    }
+  }, [twitterHandle, telegram, navigate])
+
+  useEffect(() => {
+    const isCardFullyClicked = gameState.bingoCard.every((row) =>
+      row.every((tile) => tile === true))
+
+    if (isCardFullyClicked) {
+      setConfirmCard(true)
+    } else {
+      setConfirmCard(false)
+    }
+  }, [gameState.bingoCard])
 
   const handleTileClick = (rowIndex, colIndex) => {
     gameState.bingoCard[rowIndex][colIndex] = !gameState.bingoCard[rowIndex][colIndex]
     const newBingoCard = [...gameState.bingoCard];
-    const { newBingoCount } = findBingos(newBingoCard);
 
     gameState.bingoCard = newBingoCard
     setGameState({ ...gameState });
 
-    if (newBingoCount > gameState.bingoCount) {
-      gameState.bingoCount = gameState.bingoCount + 1
-      setGameState({ ...gameState });
-      fetch(`/api/telegram/bingo?userName=${userInfo.data.twitter}`);
-      navigate("/bingo-message");
-    }
-
-    const isCardFullyClicked = newBingoCard.every((row) =>
-      row.every((tile) => tile === true)
-    );
-
-    if (isCardFullyClicked) {
-      // Game over when the card is filled
-      // do whatever finish logic we want here
-      gameState.gameOver = true;
-      setGameState({ ...gameState })
-      fetch(`/api/telegram/bingo?userName=${userInfo.data.twitter}`);
-    }
     if (rowIndex === 1 && colIndex === 1 && !gameState.freeOpened) {
       gameState.freeOpened = true
       setGameState({ ...gameState })
@@ -54,6 +53,13 @@ console.log({userInfo}, userInfo.data.twitter, userInfo.data)
     }
   };
 
+  function handleConfirm() {
+    navigate("/winner");
+  }
+
+  function handleBack() {
+    navigate("/game-directions")
+  }
 
   return (
     <div
@@ -64,13 +70,17 @@ console.log({userInfo}, userInfo.data.twitter, userInfo.data)
       <div className="line top-line"></div>
       <BingoIcon />
       <div className="intro">
+        <div className="back-box">
+          <img className="arrow-back" src="/arrow-back.svg" alt="arrow-back" />
+          <span onClick={handleBack}>Back to Directions</span>
+        </div>
         <p>
           Network with people around you to find the folks in the square. To
           win, complete a three in a row horizontal, vertical, or diagonal.
         </p>
         <h3 className="uppercase">Good Luck!</h3>
       </div>
-      <div className="bingo-grid ">
+      <div className="bingo-grid">
         {gameState.bingoCard.map((row, rowIndex) =>
           row.map((_, colIndex) => {
             const { firstName, lastName, company, position, special } =
@@ -101,16 +111,18 @@ console.log({userInfo}, userInfo.data.twitter, userInfo.data)
                   {gameState.bingoCard[rowIndex][colIndex] ? (
                     <>
                       <div className="name">
-                        <span className="first-name">{firstName}</span>
+                        <span>{firstName}</span>
                         {lastName && (
-                          <span className="last-name">{lastName}</span>
+                          <span>{lastName}</span>
                         )}
                       </div>
-                      <div className="position">
-                        {position && <span>{position}</span>}
-                      </div>
-                      <div className="company">
-                        {company && <span>{company}</span>}
+                      <div>
+                        <div className="position">
+                          {position && <span>{position}</span>}
+                        </div>
+                        <div className="company">
+                          {company && <span>{company}</span>}
+                        </div>
                       </div>
                     </>
                   ) : (
@@ -135,6 +147,12 @@ console.log({userInfo}, userInfo.data.twitter, userInfo.data)
           })
         )}
       </div>
+      {confirmCard && (
+        <div className="confirm">
+          <span>You did it! Please take this card to Breevie to confirm your bingo!</span>
+          <button onClick={handleConfirm} className="confirm-button">Confirm</button>
+        </div>
+      )}
 
       <div className="line"></div>
       <Sponsors />

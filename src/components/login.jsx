@@ -9,16 +9,15 @@ import { SupabaseContext } from '../SupabaseContext';
 const LoginPage = () => {
   const [twitterHandle, setTwitterHandle] = useState('');
   const [telegram, setTelegram] = useState('');
-  const [name, setName] = useState('');
-  const [title, setTitle] = useState('');
   const navigate = useNavigate();
   const { supabaseClient } = useContext(SupabaseContext);
 
-// Need some way of knowing who is logged in on the bingo page
+  // Need some way of knowing who is logged in on the bingo page
   useEffect(() => {
     const twitter = localStorage.getItem("twitterHandle")
+    const telegram = localStorage.getItem("telegram")
 
-    if (twitter ) {
+    if (twitter || telegram) {
       navigate('/bingo')
     }
   }, [navigate])

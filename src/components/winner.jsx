@@ -12,8 +12,6 @@ import Star5 from '../assets/images/star-5';
 import Star6 from '../assets/images/star-6';
 import StarBox from '../assets/images/star-box';
 
-
-
 const WinnerPage = () => {
   const [twitterHandle, setTwitterHandle] = useState('');
 
@@ -23,28 +21,30 @@ const WinnerPage = () => {
     if (handle) {
       setTwitterHandle(handle);
     }
-  }, []); 
+  }, []);
 
   return (
     <div className="container">
       <HeaderImg />
       <div className="line top-line"></div>
       <BingoIcon />
-      <Star1/>
-      <Star2/>
-      <Star3/>
-      <Star4/>
-      <Star5/>
-      <Star6/>
-      <StarBox/>
-      {twitterHandle ? (
-        <div className="winner-page">
-          <h1>Congratulations Winner!</h1> 
-          <p>@{twitterHandle}</p> 
-        </div>
-      ) : (
-        <p>You won, but we couldn't retrieve your Twitter handle.</p>
-      )}
+      <Star1 />
+      <Star2 />
+      <Star3 />
+      <Star4 />
+      <Star5 />
+      <Star6 />
+      <StarBox />
+      <div className="winner-page">
+        {twitterHandle ? (
+          <>
+            <h1>Congratulations Winner!</h1>
+            <span>{twitterHandle}</span>
+          </>
+        ) : (
+          <p className='no-twitter'>You won, but we couldn't retrieve your Twitter handle.</p>
+        )}
+      </div>
       <p className="thanks-for-playing">Thanks for playing!</p>
       <div className="line"></div>
     </div>
