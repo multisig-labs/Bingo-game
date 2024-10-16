@@ -1,17 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { SupabaseProvider } from './SupabaseContext';
-import { BingoProvider } from './BingoContext';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { SupabaseProvider } from "./SupabaseContext";
+import { BingoProvider } from "./BingoContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient();
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <SupabaseProvider>
-      <BingoProvider>
-        <App />
-      </BingoProvider>
-    </SupabaseProvider>
+    <QueryClientProvider client={queryClient}>
+      <SupabaseProvider>
+        <BingoProvider>
+          <App />
+        </BingoProvider>
+      </SupabaseProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

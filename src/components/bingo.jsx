@@ -10,13 +10,16 @@ import HeaderImg from "../assets/images/header-img";
 import BingoIcon from "../assets/images/bingo-logo";
 import balloonRed from "../assets/images/balloon-red.svg";
 import balloonPurple from "../assets/images/balloon-purple.svg";
+import {useSupabase} from '../hooks/useSupabase'
 
 const Bingo = () => {
   const navigate = useNavigate();
   const [isFreeModalOpen, setIsFreeModalOpen] = useState(false);
   const { gameState, setGameState } = useContext(BingoContext);
-
   const twitterHandle = localStorage.getItem("twitterHandle");
+console.log({twitterHandle})
+  const {data: userInfo } = useSupabase({twitterHandle})
+console.log({userInfo}, userInfo.data.twitter, userInfo.data)
 
   const handleTileClick = (rowIndex, colIndex) => {
     gameState.bingoCard[rowIndex][colIndex] = !gameState.bingoCard[rowIndex][colIndex]
@@ -29,6 +32,7 @@ const Bingo = () => {
     if (newBingoCount > gameState.bingoCount) {
       gameState.bingoCount = gameState.bingoCount + 1
       setGameState({ ...gameState });
+      fetch(`/api/telegram/bingo?userName=${userInfo.data.twitter}`);
       navigate("/bingo-message");
     }
 
@@ -41,7 +45,7 @@ const Bingo = () => {
       // do whatever finish logic we want here
       gameState.gameOver = true;
       setGameState({ ...gameState })
-      fetch(`/api/telegram/bingo?${twitterHandle}`);
+      fetch(`/api/telegram/bingo?userName=${userInfo.data.twitter}`);
     }
     if (rowIndex === 1 && colIndex === 1 && !gameState.freeOpened) {
       gameState.freeOpened = true

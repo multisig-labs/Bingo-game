@@ -14,15 +14,14 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const { supabaseClient } = useContext(SupabaseContext);
 
+// Need some way of knowing who is logged in on the bingo page
+  useEffect(() => {
+    const twitter = localStorage.getItem("twitterHandle")
 
-  // useEffect(() => {
-  //   const twitter = localStorage.getItem("twitterHandle")
-  //   const tg = localStorage.getItem("telegram")
-
-  //   if (twitter && tg) {
-  //     navigate('/bingo')
-  //   }
-  // }, [navigate])
+    if (twitter ) {
+      navigate('/bingo')
+    }
+  }, [navigate])
 
   const handleLogin = async (e) => {
     e.preventDefault();
